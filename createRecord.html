@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Record | e-Medibalance</title>
+    <link rel="stylesheet" href="./src/bulma.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">Add Record</h1>
+
+        <form id="recordForm" class="box">
+            <div class="field">
+                <label class="label" for="tarikh">Tarikh</label>
+                <div class="control">
+                    <input class="input" type="text" id="tarikh" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="jumlah">Jumlah</label>
+                <div class="control">
+                    <input class="input" type="number" id="jumlah" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="lokasi">Lokasi</label>
+                <div class="control">
+                    <input class="input" type="text" id="lokasi" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="teacher">Teacher</label>
+                <div class="control">
+                    <div class="select">
+                        <select id="teacher" required>
+                            <option value="" disabled selected>Select teacher</option>
+                            <!-- Teachers will be dynamically loaded here -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary" type="submit">Add Record</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="./dist/createRecord.bundle.js" type="module"></script>
+</body>
+
+</html>

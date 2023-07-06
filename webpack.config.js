@@ -6,9 +6,7 @@ module.exports = {
       index: './src/index.js',
       profile: './src/profile.js',
       createPengguna: './src/createPengguna.js',
-    //   listingPage: './src/listingPage/senarai.js',
-    //   ciptaPage: './src/ciptaPage/cipta.js',
-    //   individualProgramPage: './src/individualProgramPage/program.js',
+      createRecord: './src/createRecord.js',
     },
     output: {
         filename: '[name].bundle.js',

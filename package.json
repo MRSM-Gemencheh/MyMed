@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "firebase": "^9.23.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "name": "e-medibalance",
+  "description": "Sistem semak baki elaun panel klinik bagi staf MARA",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MRSM-Gemencheh/e-MediBalance.git"
+  },
+  "keywords": [
+    "js"
+  ],
+  "author": "MRSM Gemencheh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MRSM-Gemencheh/e-MediBalance/issues"
+  },
+  "homepage": "https://github.com/MRSM-Gemencheh/e-MediBalance#readme"
+}

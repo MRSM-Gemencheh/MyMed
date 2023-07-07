@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
 
     <link rel="stylesheet" href="./src/bulma.min.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
@@ -23,9 +25,6 @@
 
                     <div class="navbar-item">
                         <div class="buttons">
-                            <!-- <button class="button is-primary" id="signInButton">Log Masuk</button> -->
-                            <a class="pr-3" href="./admin.html"><button class="button is-info" id="adminButton">Admin
-                                    Panel</button></a>
                             <button class="button is-danger" id="signOutButton">Log
                                 Keluar</button>
                         </div>
@@ -35,14 +34,74 @@
             </div>
         </div>
     </nav>
-    <progress class="progress is-small is-warning" max="100" id="signInRequiredProgressBar" style="display: none;">15%</progress>
+
+    <progress class="progress is-small is-warning" max="100" id="signInRequiredProgressBar"
+        style="display: none;">15%</progress>
     <div class="notification is-warning" id="signInRequiredText" style="display: none;">
-Anda belum log masuk, sila log masuk untuk mengemaskini data. Sedang menghantar anda ke laman utama...
-      </div>
+        Anda belum log masuk, sila log masuk untuk mengemaskini data. Sedang menghantar anda ke laman utama...
+    </div>
+
+    <section class="hero is-small is-link p-5">
+        <div class="hero-body">
+            <p class="title is-3">
+                Admin Panel
+            </p>
+        </div>
+    </section>
+
+    <div class="block"></div>
+
+    
+    <div class="container">
+        <a href="./createPengguna.html"><button class="button is-primary mr-4">Daftar Pengguna Baharu</button></a>
+        <a href="./createRecord.html"><button class="button is-primary">Tambah Rekod</button></a>
+
+        <div class="block"></div>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th><abbr title="Position">Pos</abbr></th>
+                    <th>Team</th>
+                    <th><abbr title="Played">Pld</abbr></th>
+                    <th><abbr title="Won">W</abbr></th>
+                    <th><abbr title="Drawn">D</abbr></th>
+                    <th><abbr title="Lost">L</abbr></th>
+                    <th><abbr title="Goals for">GF</abbr></th>
+                    <th><abbr title="Goals against">GA</abbr></th>
+                    <th><abbr title="Goal difference">GD</abbr></th>
+                    <th><abbr title="Points">Pts</abbr></th>
+                    <th>Qualification or relegation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>1</th>
+                    <td><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">Leicester City</a> <strong>(C)</strong>
+                    </td>
+                    <td>38</td>
+                    <td>23</td>
+                    <td>12</td>
+                    <td>3</td>
+                    <td>68</td>
+                    <td>36</td>
+                    <td>+32</td>
+                    <td>81</td>
+                    <td>Qualification for the <a href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage" title="2016–17 UEFA Champions League">Champions League group stage</a></td>
+                  </tr>
+                </tbody>
+              </table>
+    
+    
+    
+        </div>
+
+    </div>
 
 
 
 
     <script src="./dist/admin.bundle.js"></script>
 </body>
+
 </html>

@@ -15,9 +15,42 @@ const firebaseConfig = {
 
 
 initializeApp(firebaseConfig);
+
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
+
+auth.onAuthStateChanged(function (user) {
+  if (user) {
+      // User is signed in, you can access the user object
+      console.log(user);
+
+      userName.textContent = user.displayName;
+      signOutButton.style.display = "block"
+  } else {
+      // User is signed out
+      console.log("User is not logged in");
+
+      // Redirect user back to sign in page
+
+      let signInRequiredProgressBar = document.getElementById('signInRequiredProgressBar')
+      let signInRequiredText = document.getElementById('signInRequiredText')
+
+      signInRequiredProgressBar.style.display = "block"
+      signInRequiredText.style.display = "block"
+
+      // REENABLE THIS ONCE DEVELOPMENT IS DONE
+
+      // setTimeout(function() {
+      //     location.href = "./index.html"
+      // }, 2000)
+  }
+});
+
+
 const db = getFirestore();
 
 const recordForm = document.getElementById("recordForm");
+
 recordForm.addEventListener("submit", (event) => {
     event.preventDefault();
 

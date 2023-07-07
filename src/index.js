@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, getAuth, signOut } from "firebase/auth";
+import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, getAuth, signOut, OAuthProvider } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -16,14 +16,19 @@ const firebaseConfig = {
     messagingSenderId: "117392039951",
     appId: "1:117392039951:web:eee754ac35979a36af437a",
     measurementId: "G-PG5LK8VTP9"
-};
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const provider = new GoogleAuthProvider();
+const provider = new OAuthProvider('microsoft.com', '708855ff-2443-4a76-8e6b-766565c5928e');
 const auth = getAuth();
+
+provider.setCustomParameters({
+    prompt: "login",
+    tenant: "common",
+  });
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -38,17 +43,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 getRedirectResult(getAuth())
     .then((result) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+        // IdP data available in result.additionalUserInfo.profile.
+
+        // Get the OAuth access token and ID Token
+        const credential = OAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+        const idToken = credential.idToken;
 
         // The signed-in user info.
         const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
 
-        welcomeText.textContent = "Selamat datang! Berjaya log masuk sebagai: " + result.user.displayName
-        console.log("Sign in successful! Signed in as: " + result.user.displayName)
+        console.log(user)
 
     }).catch((error) => {
         // Handle Errors here.
@@ -57,7 +62,6 @@ getRedirectResult(getAuth())
         // The email of the user's account used.
         // const email = error.customData.email;
         // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
     });
 
@@ -80,10 +84,10 @@ auth.onAuthStateChanged(function (user) {
         signInSuccessProgressBar.style.display = "block"
         signInSuccessText.style.display = "block"
 
-        setTimeout(function() {
+        setTimeout(function () {
             location.href = "./profile.html"
         }, 2000)
-        
+
     } else {
         // User is signed out
         console.log("User is not logged in");
@@ -96,8 +100,6 @@ document.body.onload = function () {
         console.log("Sign in process initiated!")
         signInWithRedirect(auth, provider);
     })
-
-
 
     signOutButton.addEventListener('click', () => {
 

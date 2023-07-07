@@ -17,6 +17,11 @@
             <div id="navMenu" class="navbar-menu">
 
                 <div class="navbar-start">
+                    <div class="navbar-brand">
+                        <a class="navbar-item">
+                            <img src="./icon.png" alt="Logo">
+                        </a>
+                    </div>
                     <a class="navbar-item" href="./index.html">MyMed</a>
                 </div>
 
@@ -45,6 +50,8 @@
         Anda belum log masuk, sila log masuk untuk melihat rekod imbuhan. Sedang menghantar anda ke laman utama...
     </div>
 
+
+
     <section class="hero is-small is-link p-5">
         <div class="hero-body">
             <p class="title is-5" style="text-align: center;">
@@ -58,42 +65,42 @@
 
     <div class="block"></div>
 
+    <div class="notification is-warning" id="pleaseRegister">
+        <strong>Harap maaf,</strong> akaun pengguna anda belum lagi didaftar oleh pentadbir. Sila hubungi pembantu
+        tadbir beserta dengan
+        emel anda untuk pendaftaran.
+    </div>
 
-    <div class="mx-5">
+    <div id="hideMe" style="display: none;">
 
-        <div class="box has-background-primary">
-            <p class="title is-5" id="bakiElaun"> Baki Peruntukan Terkini: RM 0.00</p>
-        </div>
+        <div class="mx-5">
 
-        <hr>
-        <div class="columns">
-            <div class="column">
-
-                <p class="title is-4" id="namaPengguna">Nama Pengguna</p>
-
-                <p class="title is-5" id="noGaji">No. Gaji: 123456</p>
-
-                <p class="title is-5" id="noKadPengenalan">No. Kad Pengenalan: 010203-15-0023</p>
-
-
+            <div class="box has-background-primary">
+                <p class="title is-5" id="bakiElaun"> Baki Peruntukan Terkini: RM 0.00</p>
             </div>
 
-            <div class="column ml-5 pl-5">
+            <hr>
 
-                <p class="title is-5">Pusat: MRSM Gemencheh</p>
-    
-                <p class="title is-5">Kod Pusat: 173</p>
-    
-                <p class="title is-5" id="kelayakanPeruntukan">Kelayakan Peruntukan: RM 500.00</p>
+            <div class="box">
 
+                <div class="columns">
+
+                    <div class="column">
+                        <p class="title is-4" id="namaPengguna">Nama Pengguna</p>
+                        <p class="title is-5" id="noGaji">No. Gaji: 123456</p>
+                        <p class="title is-5" id="noKadPengenalan">No. Kad Pengenalan: 010203-15-0023</p>
+                    </div>
+
+                    <div class="column ml-5 pl-5">
+                        <p class="title is-5">Pusat: MRSM Gemencheh</p>
+                        <p class="title is-5">Kod Pusat: 173</p>
+                        <p class="title is-5" id="kelayakanPeruntukan">Kelayakan Peruntukan: RM 500.00</p>
+                    </div>
+
+                </div>
             </div>
 
-
-
-
-        </div>
-
-        <!-- <div class="box">
+            <!-- <div class="box">
             <p class="title is-5">Ahli Keluarga Yang Layak Mendapat Kemudahan Rawatan</p>
 
             <div class="table-container">
@@ -120,55 +127,56 @@
                 </table>
             </div>
         </div> -->
-        <hr>
+            <hr>
 
-        <div class="box">
-            <p class="title is-5" id="bakiPeruntukanAwal"> Baki Pembukaan Peruntukan Pada Awal Tahun: RM 0.00</p>
+            <div class="box">
+                <p class="title is-5" id="bakiPeruntukanAwal"> Baki Pembukaan Peruntukan Pada Awal Tahun: RM 0.00</p>
 
 
-            <div class="table-container">
-                <table class="table is-fullwidth">
+                <div class="table-container">
+                    <table class="table is-fullwidth">
 
-                    <thead>
-                        <tr>
-                            <th>Tarikh</th>
-                            <th>Nama Penerima Rawatan</th>
-                            <th>Klinik Panel</th>
-                            <th>No. Resit</th>
-                            <th>Imbuhan</th>
-                            <th>Baki RM</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rekodImbuhanTable">
-                        <tr>
-                            <td>10/01/2023</td>
-                            <td>Nama Pengguna</td>
-                            <td>Klinik Al'Azhim Tampin</td>
-                            <td></td>
-                            <td>RM 20.00</td>
-                            <td>RM 480.00</td>
-                        </tr>
-                        <tr>
-                            <td>10/01/2023</td>
-                            <td>Nama Pengguna</td>
-                            <td>Klinik Al'Azhim Tampin</td>
-                            <td></td>
-                            <td>RM 20.00</td>
-                            <td>RM 460.00</td>
-                        </tr>
-                        <tr>
-                            <td>10/01/2023</td>
-                            <td>Nama Pengguna</td>
-                            <td>Klinik Al'Azhim Tampin</td>
-                            <td></td>
-                            <td>RM 20.00</td>
-                            <td>RM 440.00</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <thead>
+                            <tr>
+                                <th>Tarikh</th>
+                                <th>Nama Penerima Rawatan</th>
+                                <th>Klinik Panel</th>
+                                <th>No. Resit</th>
+                                <th>Imbuhan</th>
+                                <th>Baki RM</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rekodImbuhanTable">
+                            <tr>
+                                <td>10/01/2023</td>
+                                <td>Nama Pengguna</td>
+                                <td>Klinik Al'Azhim Tampin</td>
+                                <td></td>
+                                <td>RM 20.00</td>
+                                <td>RM 480.00</td>
+                            </tr>
+                            <tr>
+                                <td>10/01/2023</td>
+                                <td>Nama Pengguna</td>
+                                <td>Klinik Al'Azhim Tampin</td>
+                                <td></td>
+                                <td>RM 20.00</td>
+                                <td>RM 460.00</td>
+                            </tr>
+                            <tr>
+                                <td>10/01/2023</td>
+                                <td>Nama Pengguna</td>
+                                <td>Klinik Al'Azhim Tampin</td>
+                                <td></td>
+                                <td>RM 20.00</td>
+                                <td>RM 440.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
     <script src="./dist/profile.bundle.js"></script>

@@ -38,29 +38,48 @@ document.body.onload = function () {
     })
 }
 
+// ...
+
 auth.onAuthStateChanged(function (user) {
     if (user) {
-        // User is signed in, you can access the user object
+        // User is signed in
         console.log(user);
-
         userName.textContent = user.displayName;
-        signOutButton.style.display = "block"
+        signOutButton.style.display = "block";
+
+        // Check if user's email exists in 'admin' collection
+        const adminCollectionRef = collection(db, 'admin');
+        const queryRef = query(adminCollectionRef, where('emel', '==', user.email));
+
+        getDocs(queryRef)
+            .then((querySnapshot) => {
+                if (querySnapshot.size > 0) {
+                    console.log("User is an admin."); // User's email exists in 'admin' collection
+                    // Perform actions for admin user
+                } else {
+                    console.log("User is not an admin."); // User's email doesn't exist in 'admin' collection
+                    setTimeout(function() {
+                        location.href = "./index.html"
+                    }, 2000)
+                }
+            })
+            .catch((error) => {
+                console.log("Error getting admin collection:", error);
+            });
     } else {
         // User is signed out
         console.log("User is not logged in");
+        
+        let signInRequiredProgressBar = document.getElementById('signInRequiredProgressBar');
+        let signInRequiredText = document.getElementById('signInRequiredText');
 
-        // Redirect user back to sign in page
+        signInRequiredProgressBar.style.display = "block";
+        signInRequiredText.style.display = "block";
 
-        let signInRequiredProgressBar = document.getElementById('signInRequiredProgressBar')
-        let signInRequiredText = document.getElementById('signInRequiredText')
-
-        signInRequiredProgressBar.style.display = "block"
-        signInRequiredText.style.display = "block"
-
-        // REENABLE THIS ONCE DEVELOPMENT IS DONE
-
-        // setTimeout(function() {
-        //     location.href = "./index.html"
-        // }, 2000)
+        // Redirect user back to sign-in page
+        setTimeout(function() {
+            location.href = "./index.html"
+        }, 2000)
     }
 });
+

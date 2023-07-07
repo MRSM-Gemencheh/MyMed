@@ -26,7 +26,8 @@
                     <div class="navbar-item">
                         <div class="buttons">
                             <!-- <button class="button is-primary" id="signInButton">Log Masuk</button> -->
-                            <a class="pr-3" href="./admin.html"><button class="button is-info" id="adminButton">Admin Panel</button></a>
+                            <a class="pr-3" href="./admin.html"><button class="button is-info" id="adminButton">Admin
+                                    Panel</button></a>
                             <button class="button is-danger" id="signOutButton">Log
                                 Keluar</button>
                         </div>
@@ -36,6 +37,10 @@
             </div>
         </div>
     </nav>
+    <progress class="progress is-small is-warning" max="100" id="signInRequiredProgressBar" style="display: none;">15%</progress>
+    <div class="notification is-warning" id="signInRequiredText" style="display: none;">
+Anda belum log masuk, sila log masuk untuk melihat rekod anda. Sedang menghantar anda ke laman utama...
+      </div>
 
     <section class="hero is-small is-link">
         <div class="hero-body">

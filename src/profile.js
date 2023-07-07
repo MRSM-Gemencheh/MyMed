@@ -23,12 +23,26 @@ const auth = getAuth();
 
 const db = getFirestore();
 
+document.body.onload = function () {
+
+    let signOutButton = document.getElementById('signOutButton')
+
+    signOutButton.addEventListener('click', () => {
+
+        signOut(auth).then(() => {
+            location.reload()
+            // Sign-out successful.
+        }).catch((error) => {
+            // An error happened.
+        });
+
+    })
+}
 
 auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in, you can access the user object
         console.log(user);
-
 
         const userEmail = user.email;
         const usersCollectionRef = collection(db, "pengguna");
@@ -92,11 +106,27 @@ auth.onAuthStateChanged(function (user) {
             });
 
         userName.textContent = user.displayName;
-        signInButton.style.display = "none"
         signOutButton.style.display = "block"
     } else {
         // User is signed out
         console.log("User is not logged in");
+
+        // Redirect user back to sign in page
+
+        let signInRequiredProgressBar = document.getElementById('signInRequiredProgressBar')
+        let signInRequiredText = document.getElementById('signInRequiredText')
+
+        signInRequiredProgressBar.style.display = "block"
+        signInRequiredText.style.display = "block"
+
+        // REENABLE THIS ONCE DEVELOPMENT IS DONE
+
+        // setTimeout(function() {
+        //     location.href = "./index.html"
+        // }, 2000)
     }
 });
+
+
+
 

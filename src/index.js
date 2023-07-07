@@ -74,6 +74,12 @@ auth.onAuthStateChanged(function (user) {
 
         // Redirect the user to the profile page
 
+        let signInSuccessProgressBar = document.getElementById('signInSuccessProgressBar')
+        let signInSuccessText = document.getElementById('signInSuccessText')
+
+        signInSuccessProgressBar.style.display = "block"
+        signInSuccessText.style.display = "block"
+
         setTimeout(function() {
             location.href = "./profile.html"
         }, 2000)

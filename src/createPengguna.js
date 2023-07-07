@@ -60,15 +60,7 @@ registerForm.addEventListener("submit", async (event) => {
     'input[name="statusPerkahwinan"]:checked'
   ).value;
 
-  let rekodImbuhan = [ [
-    {
-      tarikh: '',
-      namaPenerima: '',
-      panelKlinik: '',
-      noResit: '',
-      imbuhan: ''
-    }
-  ]
+  let rekodImbuhan = [ 
     
   ]
 

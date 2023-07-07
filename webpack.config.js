@@ -5,6 +5,7 @@ module.exports = {
     entry: {
       index: './src/index.js',
       profile: './src/profile.js',
+      admin: './src/admin.js',
       createPengguna: './src/createPengguna.js',
       createRecord: './src/createRecord.js',
     },

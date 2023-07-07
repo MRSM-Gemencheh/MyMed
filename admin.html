@@ -3,9 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Panel | MyMed</title>
+
+    <link rel="stylesheet" href="./src/bulma.min.css">
 </head>
 <body>
-    
+    <nav class="navbar">
+        <div class="container">
+            <div id="navMenu" class="navbar-menu">
+
+                <div class="navbar-start">
+                    <a class="navbar-item" href="./index.html">MyMed</a>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <p id="userName"></p>
+                    </div>
+
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <!-- <button class="button is-primary" id="signInButton">Log Masuk</button> -->
+                            <a class="pr-3" href="./admin.html"><button class="button is-info" id="adminButton">Admin
+                                    Panel</button></a>
+                            <button class="button is-danger" id="signOutButton">Log
+                                Keluar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <progress class="progress is-small is-warning" max="100" id="signInRequiredProgressBar" style="display: none;">15%</progress>
+    <div class="notification is-warning" id="signInRequiredText" style="display: none;">
+Anda belum log masuk, sila log masuk untuk mengemaskini data. Sedang menghantar anda ke laman utama...
+      </div>
+
+
+
+
+    <script src="./dist/admin.bundle.js"></script>
 </body>
 </html>

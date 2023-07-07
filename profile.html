@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile | e-Medibalance</title>
+    <title>Rekod Rawatan | MyMed</title>
 
     <link rel="stylesheet" href="./src/bulma.min.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
             <div id="navMenu" class="navbar-menu">
 
                 <div class="navbar-start">
-                    <a class="navbar-item" href="./index.html">e-MediBalance</a>
+                    <a class="navbar-item" href="./index.html">MyMed</a>
                 </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <p id="userName"></p>
                     </div>
-                    <div class="navbar-item">
 
+                    <div class="navbar-item">
                         <div class="buttons">
-                            <button class="button is-primary" id="signInButton">Log Masuk</button>
-                            <button style="display: none" class="button is-danger" id="signOutButton">Log
+                            <!-- <button class="button is-primary" id="signInButton">Log Masuk</button> -->
+                            <a class="pr-3" href="./admin.html"><button class="button is-info" id="adminButton">Admin Panel</button></a>
+                            <button class="button is-danger" id="signOutButton">Log
                                 Keluar</button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -35,31 +39,43 @@
 
     <section class="hero is-small is-link">
         <div class="hero-body">
-            <p class="title">
-                My Profile
-            </p>    
-
-
+            <p class="title is-5" style="text-align: center;">
+                MAJLIS AMANAH RAKYAT
+            </p>
+            <p class="title is-5" style="text-align: center;">
+                REKOD IMBUHAN RAWATAN PERUBATAN 2023
+            </p>
         </div>
     </section>
-    <hr>
 
-    
+    <div class="block"></div>
+
+
     <div class="mx-5">
-        
+
         <div class="box has-background-primary">
-            <p class="title is-5" id="bakiElaun"> Baki Elaun Panel: RM 150.00</p>
+            <p class="title is-5" id="bakiElaun"> Baki Peruntukan Terkini: RM 0.00</p>
         </div>
-        
+
         <hr>
         <div class="columns">
             <div class="column">
                 <div class="box">
-                    <p class="title is-4" id="namaPengguna">Ahmad Danial bin Baharuddin</p>
+                    <p class="title is-4" id="namaPengguna">Nama Pengguna</p>
+
+                    <p class="title is-5" id="noGaji">No. Gaji: 123456</p>
+
+                    <p class="title is-5">No. Kad Pengenalan: 010203-15-0023</p>
+
                 </div>
-        
+
                 <div class="box">
-                    <p class="title is-5" id="noGajiDanJawatan">No. Gaji: AD1231 | Pembantu Makmal</p>
+
+                    <p class="title is-5">Pusat: MRSM Gemencheh</p>
+
+                    <p class="title is-5">Kod Pusat: 173</p>
+
+                    <p class="title is-5">Kelayakan Peruntukan: RM 500.00</p>
                 </div>
             </div>
 
@@ -74,40 +90,90 @@
             <div class="column image-column">
                 <figure class="image is-128x128 ">
                     <img class="is-rounded" src="./128x128.png" id="gambarPengguna">
-                  </figure>
+                </figure>
+            </div>
+
+        </div>
+
+        <div class="box">
+            <p class="title is-5" id=""> Ahli Keluarga Yang Layak Mendapat Kemudahan Rawatan</p>
+
+            <div class="table-container">
+
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Bil</th>
+                            <th>Nama</th>
+                            <th>No. K/P / No. S.B</th>
+                            <th>Umur</th>
+                            <th>Hubungan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="">
+                        <tr>
+                            <th>1</th>
+                            <td>Nama Pengguna</td>
+                            <td>010203-15-0025</td>
+                            <td>24</td>
+                            <td>Sendiri</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr>
+
+        <div class="box">
+            <p class="title is-5" id=""> Baki Pembukaan Peruntukan Pada Awal Tahun: RM 0.00</p>
+
+
+            <div class="table-container">
+                <table class="table is-fullwidth">
+
+                    <thead>
+                        <tr>
+                            <th>Tarikh</th>
+                            <th>Nama Penerima Rawatan</th>
+                            <th>Klinik Panel</th>
+                            <th>No. Resit</th>
+                            <th>Imbuhan</th>
+                            <th>Baki RM</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rekodElaunTable">
+                        <tr>
+                            <td>10/01/2023</td>
+                            <td>Nama Pengguna</td>
+                            <td>Klinik Al'Azhim Tampin</td>
+                            <td></td>
+                            <td>RM 20.00</td>
+                            <td>RM 480.00</td>
+                        </tr>
+                        <tr>
+                            <td>10/01/2023</td>
+                            <td>Nama Pengguna</td>
+                            <td>Klinik Al'Azhim Tampin</td>
+                            <td></td>
+                            <td>RM 20.00</td>
+                            <td>RM 460.00</td>
+                        </tr>
+                        <tr>
+                            <td>10/01/2023</td>
+                            <td>Nama Pengguna</td>
+                            <td>Klinik Al'Azhim Tampin</td>
+                            <td></td>
+                            <td>RM 20.00</td>
+                            <td>RM 440.00</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-
-
-
-
-        <table class="table is-fullwidth">
-            <thead>
-              <tr>
-                <th><abbr title="Bilangan">Bil.</abbr></th>
-                <th>Tarikh</th>
-                <th>Lokasi</th>
-                <th>Jumlah</th>
-                <th>Resit / Invois</th>
-                <th>Baki</th>
-              </tr>
-            </thead>
-            <tbody id="rekodElaunTable">
-              <tr>
-                <th>1</th>
-                <td>10/10/2020</td>
-                <td>Klinik Lancester</td>
-                <td>RM 50.00</td>
-                <td>123456789</td>
-                <td>RM 150.00</td>
-              </tr>
-            </tbody>
-          </table>
-
-
     </div>
 
-    <script src="./dist/profile.bundle.js"></script>
+    <!-- <script src="./dist/profile.bundle.js"></script> -->
 </body>
+
 </html>

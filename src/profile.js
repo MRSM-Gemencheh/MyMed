@@ -41,11 +41,11 @@ auth.onAuthStateChanged(function (user) {
 
                     // Update profile information
                     const namaPengguna = document.getElementById("namaPengguna");
-                    const noGajiDanJawatan = document.getElementById("noGajiDanJawatan");
+                    const noGaji = document.getElementById("noGaji");
                     const gambarPengguna = document.getElementById("gambarPengguna");
 
                     namaPengguna.textContent = doc.data().nama;
-                    noGajiDanJawatan.textContent = `No. Gaji: ${doc.data().noGaji} | ${doc.data().jawatan}`;
+                    noGaji.textContent = `No. Gaji: ${doc.data().noGaji}`;
                     gambarPengguna.src = user.photoURL;
 
                     // Starting allowance is RM 500 if 'statusPerkahwinan' is false, and RM 2000 otherwise
@@ -61,7 +61,7 @@ auth.onAuthStateChanged(function (user) {
 
                     // Update allowance balance
                     const bakiElaun = document.getElementById("bakiElaun");
-                    bakiElaun.textContent = `Baki Elaun Panel: RM ${remainingAllowance.toFixed(2)}`;
+                    bakiElaun.textContent = `Baki Peruntukan Terkini: RM ${remainingAllowance.toFixed(2)}`;
 
                     // Update allowance records table
                     const rekodElaunTable = document.getElementById("rekodElaunTable");

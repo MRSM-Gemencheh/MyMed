@@ -94,6 +94,10 @@ recordForm.addEventListener("submit", async (event) => {
     } catch (error) {
         console.error("Error appending record data:", error);
     }
+
+    setTimeout(function () {
+        location.href = "./index.html"
+    }, 2000)
 });
 
 // Function to fetch the list of teachers from the 'pengguna' collection

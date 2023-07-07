@@ -91,6 +91,8 @@ auth.onAuthStateChanged(function (user) {
                     const rekodImbuhanTable = document.getElementById("rekodImbuhanTable");
                     rekodImbuhanTable.innerHTML = ""; // Clear existing table rows
 
+                    remainingAllowance = remainingAllowance + totalSpending
+                    
                     doc.data().rekodImbuhan.forEach((rekod) => {
                         const row = document.createElement("tr");
 
@@ -102,7 +104,7 @@ auth.onAuthStateChanged(function (user) {
                         // ChatGPT: Implement the automatic calculation of remaining allowance per each record here
 
                         // Calculate remaining allowance for each record
-                        const remainingAllowancePerRecord = remainingAllowance - rekod.imbuhan;
+                        const remainingAllowancePerRecord = remainingAllowance - rekod.imbuhan ;
 
                         // Update remaining allowance for the next record
                         remainingAllowance = remainingAllowancePerRecord;

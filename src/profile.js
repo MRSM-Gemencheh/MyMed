@@ -50,7 +50,6 @@ auth.onAuthStateChanged(function (user) {
         getDocs(queryRef)
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    console.log("User document:", doc.data());
 
                     // Update profile information
                     const namaPengguna = document.getElementById("namaPengguna");

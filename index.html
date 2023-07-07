@@ -20,6 +20,9 @@
         }
     </style>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./src/bulma.min.css">
 </head>
 
@@ -29,6 +32,11 @@
             <div id="navMenu" class="navbar-menu">
 
                 <div class="navbar-start">
+                    <div class="navbar-brand">
+                        <a class="navbar-item">
+                            <img src="./icon.png" alt="Logo">
+                        </a>
+                    </div>
                     <a class="navbar-item" href="./index.html">MyMed</a>
                 </div>
 
@@ -42,10 +50,11 @@
         </div>
     </nav>
 
-    <progress class="progress is-small is-success" max="100" id="signInSuccessProgressBar" style="display: none;">15%</progress>
+    <progress class="progress is-small is-success" max="100" id="signInSuccessProgressBar"
+        style="display: none;">15%</progress>
     <div class="notification is-success" id="signInSuccessText" style="display: none;">
-Log masuk berjaya! Sedang menghantar anda ke paparan rekod imbuhan...
-      </div>
+        Log masuk berjaya! Sedang menghantar anda ke paparan rekod imbuhan...
+    </div>
 
     <div class="container">
         <section class="hero is-medium is-link ">
@@ -55,10 +64,12 @@ Log masuk berjaya! Sedang menghantar anda ke paparan rekod imbuhan...
                     MyMed
                 </p>
 
-                <p class="subtitle" style="text-align: center;">Sistem semak baki peruntukan panel klinik penjawat MARA</p>
+                <p class="subtitle" style="text-align: center;">Sistem semak baki peruntukan panel klinik penjawat MARA
+                </p>
 
                 <div class="center pb-5">
-                    <button class="button is-primary" id="signInButton">Log Masuk</button>
+                    <button class="button is-primary" id="signInButton"><i class="fa-brands fa-microsoft p-2"></i>Log
+                        Masuk dengan Microsoft</button>
                 </div>
 
                 <div class="center">

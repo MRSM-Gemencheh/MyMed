@@ -39,11 +39,9 @@ auth.onAuthStateChanged(function (user) {
       signInRequiredProgressBar.style.display = "block"
       signInRequiredText.style.display = "block"
 
-      // REENABLE THIS ONCE DEVELOPMENT IS DONE
-
-      // setTimeout(function() {
-      //     location.href = "./index.html"
-      // }, 2000)
+      setTimeout(function() {
+          location.href = "./index.html"
+      }, 2000)
   }
 });
 
@@ -55,20 +53,33 @@ registerForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const nama = document.getElementById("nama").value;
+  const noKadPengenalan = document.getElementById('noKadPengenalan').value
   const emel = document.getElementById("emel").value;
   const noGaji = document.getElementById("noGaji").value;
-  const jawatan = document.getElementById("jawatan").value;
   const statusPerkahwinan = document.querySelector(
     'input[name="statusPerkahwinan"]:checked'
   ).value;
 
+  let rekodImbuhan = [ [
+    {
+      tarikh: '',
+      namaPenerima: '',
+      klinikPanel: '',
+      noResit: '',
+      imbuhan: ''
+    }
+  ]
+    
+  ]
+
   try {
     const penggunaData = {
       nama: nama,
+      noKadPengenalan: noKadPengenalan,
       emel: emel,
       noGaji: noGaji,
-      jawatan: jawatan,
       statusPerkahwinan: statusPerkahwinan,
+      rekodImbuhan: rekodImbuhan
     };
 
     // Add new 'pengguna' document to the 'pengguna' collection

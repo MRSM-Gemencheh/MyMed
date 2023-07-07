@@ -17,7 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
 const db = getFirestore();
@@ -61,8 +60,8 @@ auth.onAuthStateChanged(function (user) {
                     noGaji.textContent = `No. Gaji: ${doc.data().noGaji}`;
                     gambarPengguna.src = user.photoURL;
 
-                    // Starting allowance is RM 500 if 'statusPerkahwinan' is false, and RM 2000 otherwise
-                    // To get the amount for bakiElaun, subtract the starting allowance with the total spending in 'rekodKlinik' 
+                    // peruntukanAwal is RM 500 if 'statusPerkahwinan' is false, and RM 2000 otherwise
+                    // To get the amount for baki RM, subtract the starting allowance with the total spending in 'rekodKlinik' 
 
                     // Calculate allowance balance
                     const startingAllowance = doc.data().statusPerkahwinan ? 2000 : 500;
@@ -77,26 +76,35 @@ auth.onAuthStateChanged(function (user) {
                     bakiElaun.textContent = `Baki Peruntukan Terkini: RM ${remainingAllowance.toFixed(2)}`;
 
                     // Update allowance records table
-                    const rekodElaunTable = document.getElementById("rekodElaunTable");
-                    rekodElaunTable.innerHTML = ""; // Clear existing table rows
+                    const rekodImbuhanTable = document.getElementById("rekodImbuhanTable");
+                    rekodImbuhanTable.innerHTML = ""; // Clear existing table rows
 
-                    let i = 0
-
-                    doc.data().rekodKlinik.forEach((rekod) => {
+                    doc.data().rekodImbuhan.forEach((rekod) => {
                         const row = document.createElement("tr");
-                        
+
                         const tarikh = new Date(rekod.tarikh.seconds * 1000);
                         const options = { day: "numeric", month: "long", year: "numeric" };
                         const formattedTarikh = tarikh.toLocaleDateString("ms-MY", options);
-                        
+
+
+                        // ChatGPT: Implement the automatic calculation of remaining allowance per each record here
+
+                        // Calculate remaining allowance for each record
+                        const remainingAllowancePerRecord = remainingAllowance - rekod.imbuhan;
+
+                        // Update remaining allowance for the next record
+                        remainingAllowance = remainingAllowancePerRecord;
+
                         row.innerHTML = `
-                            <th>${++i}</th>
                             <td>${formattedTarikh}</td>
-                            <td>${rekod.lokasi}</td>
-                            <td>${rekod.jumlah}</td>
+                            <td>${rekod.namaPenerima}</td>
+                            <td>${rekod.klinikPanel}</td>
+                            <td>${rekod.noResit}</td>
+                            <td>${rekod.imbuhan}</td>
+                            <td>${remainingAllowance}</td>
                         `;
-                        
-                        rekodElaunTable.appendChild(row);
+
+                        rekodImbuhanTable.appendChild(row);
                     });
                 });
             })
@@ -118,11 +126,9 @@ auth.onAuthStateChanged(function (user) {
         signInRequiredProgressBar.style.display = "block"
         signInRequiredText.style.display = "block"
 
-        // REENABLE THIS ONCE DEVELOPMENT IS DONE
-
-        // setTimeout(function() {
-        //     location.href = "./index.html"
-        // }, 2000)
+        setTimeout(function () {
+            location.href = "./index.html"
+        }, 2000)
     }
 });
 

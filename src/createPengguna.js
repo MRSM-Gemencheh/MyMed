@@ -64,7 +64,7 @@ registerForm.addEventListener("submit", async (event) => {
     {
       tarikh: '',
       namaPenerima: '',
-      klinikPanel: '',
+      panelKlinik: '',
       noResit: '',
       imbuhan: ''
     }

@@ -42,6 +42,7 @@ auth.onAuthStateChanged(function (user) {
         // User is signed in, you can access the user object
         console.log(user);
 
+        const accessToken = user.accessToken
         const userEmail = user.email;
         const usersCollectionRef = collection(db, "pengguna");
         const queryRef = query(usersCollectionRef, where("emel", "==", userEmail));
@@ -54,22 +55,20 @@ auth.onAuthStateChanged(function (user) {
                     // Update profile information
                     const namaPengguna = document.getElementById("namaPengguna");
                     const noGaji = document.getElementById("noGaji");
-                    const gambarPengguna = document.getElementById("gambarPengguna");
 
                     namaPengguna.textContent = doc.data().nama;
                     noGaji.textContent = `No. Gaji: ${doc.data().noGaji}`;
-                    gambarPengguna.src = user.photoURL;
 
-                    // peruntukanAwal is RM 500 if 'statusPerkahwinan' is false, and RM 2000 otherwise
+                    // peruntukanAwal is RM 500 if 'statusPerkahwinan' is 'bujang', and RM 2000 otherwise
                     // To get the amount for baki RM, subtract the starting allowance with the total spending in 'rekodKlinik' 
 
-                    // Calculate allowance balance
-                    const startingAllowance = doc.data().statusPerkahwinan ? 2000 : 500;
-                    const totalSpending = doc.data().rekodKlinik.reduce(
-                        (total, rekod) => total + rekod.jumlah,
+                    // Calculate starting allowance 
+                    const startingAllowance = doc.data().statusPerkahwinan === "bujang" ? 500 : 2000;
+                    const totalSpending = doc.data().rekodImbuhan.reduce(
+                        (total, rekod) => total + rekod.imbuhan,
                         0
                     );
-                    const remainingAllowance = startingAllowance - totalSpending;
+                    let remainingAllowance = startingAllowance - totalSpending;
 
                     // Update allowance balance
                     const bakiElaun = document.getElementById("bakiElaun");
@@ -82,7 +81,7 @@ auth.onAuthStateChanged(function (user) {
                     doc.data().rekodImbuhan.forEach((rekod) => {
                         const row = document.createElement("tr");
 
-                        const tarikh = new Date(rekod.tarikh.seconds * 1000);
+                        const tarikh = new Date(rekod.tarikh);
                         const options = { day: "numeric", month: "long", year: "numeric" };
                         const formattedTarikh = tarikh.toLocaleDateString("ms-MY", options);
 
@@ -98,10 +97,10 @@ auth.onAuthStateChanged(function (user) {
                         row.innerHTML = `
                             <td>${formattedTarikh}</td>
                             <td>${rekod.namaPenerima}</td>
-                            <td>${rekod.klinikPanel}</td>
+                            <td>${rekod.panelKlinik}</td>
                             <td>${rekod.noResit}</td>
-                            <td>${rekod.imbuhan}</td>
-                            <td>${remainingAllowance}</td>
+                            <td>${'RM ' + rekod.imbuhan.toFixed(2)}</td>
+                            <td>${'RM ' + remainingAllowance.toFixed(2)}</td>
                         `;
 
                         rekodImbuhanTable.appendChild(row);
@@ -131,6 +130,10 @@ auth.onAuthStateChanged(function (user) {
         }, 2000)
     }
 });
+
+
+
+
 
 
 

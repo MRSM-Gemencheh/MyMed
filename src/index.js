@@ -71,6 +71,13 @@ auth.onAuthStateChanged(function (user) {
         userName.textContent = user.displayName;
         signInButton.style.display = "none"
         signOutButton.style.display = "block"
+
+        // Redirect the user to the profile page
+
+        setTimeout(function() {
+            location.href = "./profile.html"
+        }, 2000)
+        
     } else {
         // User is signed out
         console.log("User is not logged in");

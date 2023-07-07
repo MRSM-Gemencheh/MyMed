@@ -4,8 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e-MediBalance</title>
+    <title>Login | MyMed</title>
 
+    <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero {
+            border-radius: 10px;
+        }
+    </style>
 
     <link rel="stylesheet" href="./src/bulma.min.css">
 </head>
@@ -16,35 +27,52 @@
             <div id="navMenu" class="navbar-menu">
 
                 <div class="navbar-start">
-                    <a class="navbar-item" href="./index.html">e-MediBalance</a>
+                    <a class="navbar-item" href="./index.html">MyMed</a>
                 </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <p id="userName"></p>
                     </div>
-                    <div class="navbar-item">
 
-                        <div class="buttons">
-                            <button class="button is-primary" id="signInButton">Log Masuk</button>
-                            <button style="display: none" class="button is-danger" id="signOutButton">Log
-                                Keluar</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <section class="hero is-medium is-link">
-        <div class="hero-body">
-            <p class="title">
-                e-MediBalance
-            </p>
+    <progress class="progress is-small is-success" max="100">15%</progress>
+    <div class="notification is-success">
+        <!-- <button class="delete"></button> -->
+Log masuk berjaya! Sedang menghantar anda ke paparan rekod imbuhan...
+      </div>
 
-            <a href="./profile.html"><button class="button">Go to My Profile</button></a>
-        </div>
-    </section>
+    <div class="container">
+        <section class="hero is-medium is-link ">
+            <div class="hero-body">
+
+                <p class="title" style="text-align: center;">
+                    MyMed
+                </p>
+
+                <p class="subtitle" style="text-align: center;">Sistem semak baki peruntukan panel klinik penjawat MARA</p>
+
+                <div class="center pb-5">
+                    <button class="button is-primary" id="signInButton">Log Masuk</button>
+                </div>
+
+                <div class="center">
+                    <button style="display: none" class="button is-danger" id="signOutButton">Log
+                        Keluar</button>
+
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+
+
 
     <hr>
     <script src="./dist/index.bundle.js" type="module" defer></script>

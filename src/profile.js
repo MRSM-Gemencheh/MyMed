@@ -100,9 +100,6 @@ auth.onAuthStateChanged(function (user) {
                         const options = { day: "numeric", month: "long", year: "numeric" };
                         const formattedTarikh = tarikh.toLocaleDateString("ms-MY", options);
 
-
-                        // ChatGPT: Implement the automatic calculation of remaining allowance per each record here
-
                         // Calculate remaining allowance for each record
                         const remainingAllowancePerRecord = remainingAllowance - rekod.imbuhan ;
 

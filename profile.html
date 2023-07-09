@@ -16,47 +16,44 @@
 
 <body>
     <nav class="navbar">
-        <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                <img src="./icon.png" alt="Logo">
+            </a>
+            <a class="navbar-item" href="./index.html">MyMed</a>
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navMenu" class="navbar-menu">
 
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <p id="userName"></p>
+                </div>
 
-            <div class="navbar-brand">
-                <a class="navbar-item">
-                    <img src="./icon.png" alt="Logo">
-                </a>
-                <a class="navbar-item" href="./index.html">MyMed</a>
-                <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <div id="navMenu" class="navbar-menu">
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <p id="userName"></p>
-                    </div>
-
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <!-- <button class="button is-primary" id="signInButton">Log Masuk</button> -->
-                            <a class="pr-3" href="./admin.html">
-                                <button class="button is-info" id="adminButton">
-                                    <span><i class="fa-solid fa-screwdriver-wrench"></i></span>
-                                    <span class="ml-1">Admin Panel</span>
-                                </button>
-                            </a>
-                            <button class="button is-danger" id="signOutButton">
-                                <span><i class="fa-solid fa-right-from-bracket"></i></span>
-                                <span class="ml-1">Log Keluar</span>
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <!-- <button class="button is-primary" id="signInButton">Log Masuk</button> -->
+                        <a class="pr-3" href="./admin.html">
+                            <button class="button is-info" id="adminButton">
+                                <span><i class="fa-solid fa-screwdriver-wrench"></i></span>
+                                <span class="ml-1">Admin Panel</span>
                             </button>
-                        </div>
+                        </a>
+                        <button class="button is-danger" id="signOutButton">
+                            <span><i class="fa-solid fa-right-from-bracket"></i></span>
+                            <span class="ml-1">Log Keluar</span>
+                        </button>
                     </div>
-
                 </div>
             </div>
         </div>
     </nav>
+
+
     <progress class="progress is-small is-warning" max="100" id="signInRequiredProgressBar"
         style="display: none;">15%</progress>
     <div class="notification is-warning" id="signInRequiredText" style="display: none;">
@@ -100,6 +97,7 @@
 
                     <div class="column">
                         <p class="title is-4" id="namaPengguna">Nama Pengguna</p>
+                        <hr>
                         <p class="title is-5" id="noGaji">No. Gaji: 123456</p>
                         <p class="title is-5" id="noKadPengenalan">No. Kad Pengenalan: 010203-15-0023</p>
                     </div>

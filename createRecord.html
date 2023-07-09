@@ -8,6 +8,9 @@
     <link rel="icon" href="./icon.png">
 
     <link rel="stylesheet" href="./src/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -31,10 +34,16 @@
                     <div class="navbar-item">
 
                         <div class="buttons">
-                            <a class="pr-3" href="./admin.html"><button class="button is-info" id="adminButton">Admin
-                                    Panel</button></a>
-                            <button class="button is-danger" id="signOutButton">Log
-                                Keluar</button>
+                            <a class="pr-3" href="./admin.html">
+                                <button class="button is-info" id="adminButton">
+                                    <span><i class="fa-solid fa-screwdriver-wrench"></i></span>
+                                    <span class="ml-1">Admin Panel</span>
+                                </button>
+                            </a>
+                            <button class="button is-danger" id="signOutButton">
+                                <span><i class="fa-solid fa-right-from-bracket"></i></span>
+                                <span class="ml-1">Log Keluar</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -57,9 +66,9 @@
     </section>
 
     <div class="block"></div>
-    
+
     <div class="container">
-        
+
         <form id="recordForm" class="box">
             <div class="field">
                 <label class="label" for="senaraiPengguna">Nama</label>

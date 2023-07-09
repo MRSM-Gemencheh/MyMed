@@ -133,7 +133,7 @@ function renderUserData(data) {
         <td>${user.nama}</td>
         <td>${latestImbuhan}</td>
         <td>RM ${remainingAllowance.toFixed(2)}</td>
-        <td><a class="button is-link" href="kemaskiniPengguna.html?docid=${doc.id}">Kemaskini</a></td>
+        <td><a class="button is-link" href="kemaskiniPengguna.html?docid=${doc.id}"><span><i class="fa-solid fa-gear"></i></span><span class="ml-1">Kemaskini</span></a></td>
       `;
         penggunaTable.appendChild(row);
     });

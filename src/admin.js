@@ -1,5 +1,5 @@
-import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, getAuth, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { getAuth, signOut } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection, query, orderBy, getDocs, addDoc, where } from "firebase/firestore";
 
@@ -17,9 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const provider = new GoogleAuthProvider();
 const auth = getAuth();
-
 const db = getFirestore();
 
 document.body.onload = function () {
@@ -38,14 +36,16 @@ document.body.onload = function () {
     })
 }
 
-// ...
-
 auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in
         console.log(user);
+
         userName.textContent = user.displayName;
         signOutButton.style.display = "block";
+
+        // This is a crude implementation to disallow users from accessing the admin panel
+        // Users may be able to disable this part of the script and gets full admin access to create new documents
 
         // Check if user's email exists in 'admin' collection
         const adminCollectionRef = collection(db, 'admin');
@@ -58,7 +58,7 @@ auth.onAuthStateChanged(function (user) {
                     // Perform actions for admin user
                 } else {
                     console.log("User is not an admin."); // User's email doesn't exist in 'admin' collection
-                    setTimeout(function() {
+                    setTimeout(function () {
                         location.href = "./index.html"
                     }, 2000)
                 }
@@ -69,7 +69,7 @@ auth.onAuthStateChanged(function (user) {
     } else {
         // User is signed out
         console.log("User is not logged in");
-        
+
         let signInRequiredProgressBar = document.getElementById('signInRequiredProgressBar');
         let signInRequiredText = document.getElementById('signInRequiredText');
 
@@ -77,9 +77,84 @@ auth.onAuthStateChanged(function (user) {
         signInRequiredText.style.display = "block";
 
         // Redirect user back to sign-in page
-        setTimeout(function() {
+        setTimeout(function () {
             location.href = "./index.html"
         }, 2000)
     }
 });
+
+// ChatGPT: Add code to load the user's data from Firebase here
+// Load them into the table with id 'penggunaTable'
+// Sort with ascending amount of 'Baki RM'
+
+// peruntukanAwal is RM 500 if 'statusPerkahwinan' is 'bujang', and RM 2000 otherwise
+// To get the amount for baki RM, subtract the starting allowance with the total spending in 'rekodImbuhan'
+
+// All of this data is available in the document in the 'pengguna' collection of each corresponding users
+
+// Create a function to calculate the remaining balance
+function calculateRemainingBalance(user) {
+    const peruntukanAwal = user.statusPerkahwinan === 'bujang' ? 500 : 2000;
+    const sortedRekodImbuhan = user.rekodImbuhan.sort((a, b) => {
+        const dateA = new Date(a.tarikhImbuhan);
+        const dateB = new Date(b.tarikhImbuhan);
+        return dateB - dateA;
+    });
+    const latestImbuhan = sortedRekodImbuhan[0].tarikh;
+    const totalSpending = sortedRekodImbuhan.reduce((total, imbuhan) => total + imbuhan, 0);
+    return peruntukanAwal - totalSpending;
+}
+
+// Create a function to render the user data in the table
+function renderUserData(data) {
+    penggunaTable.innerHTML = ''; // Clear existing table data
+
+    data.forEach((doc, index) => {
+        const user = doc.data();
+
+        const sortedRekodImbuhan = user.rekodImbuhan.sort((a, b) => {
+            const dateA = new Date(a.tarikhImbuhan);
+            const dateB = new Date(b.tarikhImbuhan);
+            return dateB - dateA;
+        });
+        const latestImbuhan = sortedRekodImbuhan[0].tarikh;
+        // Calculate starting allowance 
+        const startingAllowance = user.statusPerkahwinan === "bujang" ? 500 : 2000;
+        const totalSpending = doc.data().rekodImbuhan.reduce(
+            (total, rekod) => total + rekod.imbuhan,
+            0
+        );
+        let remainingAllowance = startingAllowance - totalSpending;
+
+        const remainingBalance = calculateRemainingBalance(user);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <th>${index + 1}</th>
+        <td>${user.nama}</td>
+        <td>${latestImbuhan}</td>
+        <td>RM ${remainingAllowance.toFixed(2)}</td>
+        <td><a class="button is-link" href="kemaskiniPengguna.html?docid=${doc.id}">Kemaskini</a></td>
+      `;
+        penggunaTable.appendChild(row);
+    });
+}
+
+// ...
+
+// Load user data from Firestore and populate the table
+const penggunaCollectionRef = collection(db, 'pengguna');
+const userDataQuery = query(penggunaCollectionRef);
+
+getDocs(userDataQuery)
+    .then((querySnapshot) => {
+        const userData = [];
+        querySnapshot.forEach((doc) => {
+            userData.push(doc);
+        });
+        renderUserData(userData);
+    })
+    .catch((error) => {
+        console.log("Error getting user data:", error);
+    });
+
 

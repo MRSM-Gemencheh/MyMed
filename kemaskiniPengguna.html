@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,26 +11,29 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
+
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                    <img src="./icon.png" alt="Logo">
+                </a>
+                <a class="navbar-item" href="./index.html">MyMed</a>
+                <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
             <div id="navMenu" class="navbar-menu">
-
-                <div class="navbar-start">
-                    <div class="navbar-brand">
-                        <a class="navbar-item">
-                            <img src="./icon.png" alt="Logo">
-                        </a>
-                    </div>
-                    <a class="navbar-item" href="./index.html">MyMed</a>
-                </div>
-
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <p id="userName"></p>
                     </div>
                     <div class="navbar-item">
-
                         <div class="buttons">
                             <a class="pr-3" href="./admin.html">
                                 <button class="button is-info" id="adminButton">
@@ -49,89 +53,112 @@
     </nav>
 
     <progress class="progress is-small is-warning" max="100" id="signInRequiredProgressBar"
-    style="display: none;">15%</progress>
-<div class="notification is-warning" id="signInRequiredText" style="display: none;">
-    Anda belum log masuk, sila log masuk untuk mengemaskini data. Sedang menghantar anda ke laman utama...
-</div>
-
-<section class="hero is-small is-link p-5">
-    <div class="hero-body">
-        <p class="title">
-            Kemaskini Pengguna
-        </p>
+        style="display: none;">15%</progress>
+    <div class="notification is-warning" id="signInRequiredText" style="display: none;">
+        Anda belum log masuk, sila log masuk untuk mengemaskini data. Sedang menghantar anda ke laman utama...
     </div>
-</section>
 
-<div class="block"></div>
-
-<div class="container">
-    <form id="updateUserForm">
-        <div class="field">
-            <label class="label">Nama Pengguna</label>
-            <div class="control">
-                <input class="input" type="text" id="namaPenggunaInput" required>
-            </div>
+    <section class="hero is-small is-link p-5">
+        <div class="hero-body">
+            <p class="title">
+                Kemaskini Pengguna
+            </p>
         </div>
-        <div class="field">
-            <label class="label">No Kad Pengenalan</label>
-            <div class="control">
-                <input class="input" type="text" id="noKadPengenalanInput" required>
+    </section>
+
+    <div class="block"></div>
+
+    <div class="container">
+        <form id="updateUserForm">
+            <div class="field">
+                <label class="label">Nama Pengguna</label>
+                <div class="control">
+                    <input class="input" type="text" id="namaPenggunaInput" required>
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label class="label">No. Gaji</label>
-            <div class="control">
-                <input class="input" type="number" id="noGajiInput" required>
+            <div class="field">
+                <label class="label">No Kad Pengenalan</label>
+                <div class="control">
+                    <input class="input" type="text" id="noKadPengenalanInput" required>
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label class="label">Emel Microsoft</label>
-            <div class="control">
-                <input class="input" type="text" id="emelMicrosoftInput" required>
+            <div class="field">
+                <label class="label">No. Gaji</label>
+                <div class="control">
+                    <input class="input" type="number" id="noGajiInput" required>
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label class="label" for="statusPerkahwinan">Status Perkahwinan</label>
-            <div class="control">
-                <label class="radio">
-                    <input type="radio" name="statusPerkahwinan" value="berkahwin" id="berkahwin" required>
-                    Berkahwin
-                </label>
-                <label class="radio">
-                    <input type="radio" name="statusPerkahwinan" value="bujang" id="bujang" required>
-                    Bujang
-                </label>
+            <div class="field">
+                <label class="label">Emel Microsoft</label>
+                <div class="control">
+                    <input class="input" type="text" id="emelMicrosoftInput" required>
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <div class="control">
-                <button class="button is-primary" type="submit">Kemaskini</button>
+            <div class="field">
+                <label class="label" for="statusPerkahwinan">Status Perkahwinan</label>
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" name="statusPerkahwinan" value="berkahwin" id="berkahwin" required>
+                        Berkahwin
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="statusPerkahwinan" value="bujang" id="bujang" required>
+                        Bujang
+                    </label>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
-
-
-
-
-
-
-
-
-
-
-<footer class="footer">
-    <div class="content has-text-centered">
-        <p>
-            <strong>MyMed</strong> by <a href="https://github.com/MRSM-Gemencheh">MARA Junior Science College
-                Gemencheh</a>. The source code is licensed
-            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. Report bugs and erroneous activity to
-            <a href="mailto:maguswyvern@gmail.com">the developer</a>.
-        </p>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary" type="submit">Kemaskini</button>
+                </div>
+            </div>
+        </form>
     </div>
-</footer>
 
-<script src="./dist/kemaskiniPengguna.bundle.js" type="module"></script>
-    
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Get all "navbar-burger" elements
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            // Add a click event on each of them
+            $navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+
+        });
+    </script>
+
+
+
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>MyMed</strong> by <a href="https://github.com/MRSM-Gemencheh">MARA Junior Science College
+                    Gemencheh</a>. The source code is licensed
+                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. Report bugs and erroneous activity to
+                <a href="mailto:maguswyvern@gmail.com">the developer</a>.
+            </p>
+        </div>
+    </footer>
+
+    <script src="./dist/kemaskiniPengguna.bundle.js" type="module"></script>
+
 </body>
+
 </html>

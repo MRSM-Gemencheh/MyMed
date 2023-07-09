@@ -16,38 +16,43 @@
 <body>
     <nav class="navbar">
         <div class="container">
+
+
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                    <img src="./icon.png" alt="Logo">
+                </a>
+                <a class="navbar-item" href="./index.html">MyMed</a>
+                <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>    
+            </div>
+            
             <div id="navMenu" class="navbar-menu">
-
-                <div class="navbar-start">
-                    <div class="navbar-brand">
-                        <a class="navbar-item">
-                            <img src="./icon.png" alt="Logo">
-                        </a>
-                    </div>
-                    <a class="navbar-item" href="./index.html">MyMed</a>
-                </div>
-
                 <div class="navbar-end">
-                    <div class="navbar-item">
-                        <p id="userName"></p>
-                    </div>
-                    <div class="navbar-item">
-
-                        <div class="buttons">
-                            <a class="pr-3" href="./admin.html">
-                                <button class="button is-info" id="adminButton">
-                                    <span><i class="fa-solid fa-screwdriver-wrench"></i></span>
-                                    <span class="ml-1">Admin Panel</span>
-                                </button>
-                            </a>
-                            <button class="button is-danger" id="signOutButton">
-                                <span><i class="fa-solid fa-right-from-bracket"></i></span>
-                                <span class="ml-1">Log Keluar</span>
+                <div class="navbar-item">
+                    <p id="userName"></p>
+                </div>
+                <div class="navbar-item">
+                    
+                    <div class="buttons">
+                        <a class="pr-3" href="./admin.html">
+                            <button class="button is-info" id="adminButton">
+                                <span><i class="fa-solid fa-screwdriver-wrench"></i></span>
+                                <span class="ml-1">Admin Panel</span>
                             </button>
-                        </div>
+                        </a>
+                        <button class="button is-danger" id="signOutButton">
+                            <span><i class="fa-solid fa-right-from-bracket"></i></span>
+                            <span class="ml-1">Log Keluar</span>
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
+            
         </div>
     </nav>
 
@@ -112,6 +117,30 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Get all "navbar-burger" elements
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            // Add a click event on each of them
+            $navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+
+        });
+    </script>
 
     <footer class="footer">
         <div class="content has-text-centered">

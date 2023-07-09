@@ -8,6 +8,7 @@ module.exports = {
       admin: './src/admin.js',
       createPengguna: './src/createPengguna.js',
       createRecord: './src/createRecord.js',
+      kemaskiniPengguna: './src/kemaskiniPengguna.js'
     },
     output: {
         filename: '[name].bundle.js',

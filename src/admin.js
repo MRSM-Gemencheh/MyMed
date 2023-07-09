@@ -83,15 +83,6 @@ auth.onAuthStateChanged(function (user) {
     }
 });
 
-// ChatGPT: Add code to load the user's data from Firebase here
-// Load them into the table with id 'penggunaTable'
-// Sort with ascending amount of 'Baki RM'
-
-// peruntukanAwal is RM 500 if 'statusPerkahwinan' is 'bujang', and RM 2000 otherwise
-// To get the amount for baki RM, subtract the starting allowance with the total spending in 'rekodImbuhan'
-
-// All of this data is available in the document in the 'pengguna' collection of each corresponding users
-
 // Create a function to calculate the remaining balance
 function calculateRemainingBalance(user) {
     const peruntukanAwal = user.statusPerkahwinan === 'bujang' ? 500 : 2000;

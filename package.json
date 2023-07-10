@@ -6,13 +6,14 @@
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4"
   },
-  "name": "e-medibalance",
+  "name": "mymed",
   "description": "Sistem semak baki elaun panel klinik bagi staf MARA",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack --config webpack.config.js",
+    "build-dev": "webpack --config dev-webpack.config.js"
   },
   "repository": {
     "type": "git",

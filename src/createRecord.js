@@ -96,7 +96,7 @@ recordForm.addEventListener("submit", async (event) => {
     }
 
     setTimeout(function () {
-        location.href = "./index.html"
+        location.href = "./admin.html"
     }, 2000)
 });
 

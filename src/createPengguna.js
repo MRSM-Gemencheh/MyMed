@@ -4,13 +4,13 @@ import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, getAuth, sig
 import { getFirestore, collection, query, orderBy, getDocs, addDoc, where } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAzlMJB0WkUFXUXaD-GszRKxJayUo8tZQo",
-    authDomain: "e-medibalance.firebaseapp.com",
-    projectId: "e-medibalance",
-    storageBucket: "e-medibalance.appspot.com",
-    messagingSenderId: "117392039951",
-    appId: "1:117392039951:web:eee754ac35979a36af437a",
-    measurementId: "G-PG5LK8VTP9"
+  apiKey: "AIzaSyAzlMJB0WkUFXUXaD-GszRKxJayUo8tZQo",
+  authDomain: "e-medibalance.firebaseapp.com",
+  projectId: "e-medibalance",
+  storageBucket: "e-medibalance.appspot.com",
+  messagingSenderId: "117392039951",
+  appId: "1:117392039951:web:eee754ac35979a36af437a",
+  measurementId: "G-PG5LK8VTP9"
 };
 
 // Initialize Firebase
@@ -22,26 +22,26 @@ const auth = getAuth();
 
 auth.onAuthStateChanged(function (user) {
   if (user) {
-      // User is signed in, you can access the user object
-      console.log(user);
+    // User is signed in, you can access the user object
+    console.log(user);
 
-      userName.textContent = user.displayName;
-      signOutButton.style.display = "block"
+    userName.textContent = user.displayName;
+    signOutButton.style.display = "block"
   } else {
-      // User is signed out
-      console.log("User is not logged in");
+    // User is signed out
+    console.log("User is not logged in");
 
-      // Redirect user back to sign in page
+    // Redirect user back to sign in page
 
-      let signInRequiredProgressBar = document.getElementById('signInRequiredProgressBar')
-      let signInRequiredText = document.getElementById('signInRequiredText')
+    let signInRequiredProgressBar = document.getElementById('signInRequiredProgressBar')
+    let signInRequiredText = document.getElementById('signInRequiredText')
 
-      signInRequiredProgressBar.style.display = "block"
-      signInRequiredText.style.display = "block"
+    signInRequiredProgressBar.style.display = "block"
+    signInRequiredText.style.display = "block"
 
-      setTimeout(function() {
-          location.href = "./index.html"
-      }, 2000)
+    setTimeout(function () {
+      location.href = "./index.html"
+    }, 2000)
   }
 });
 
@@ -60,8 +60,8 @@ registerForm.addEventListener("submit", async (event) => {
     'input[name="statusPerkahwinan"]:checked'
   ).value;
 
-  let rekodImbuhan = [ 
-    
+  let rekodImbuhan = [
+
   ]
 
   try {
@@ -81,7 +81,11 @@ registerForm.addEventListener("submit", async (event) => {
 
     // Clear the form inputs
     registerForm.reset();
-    
+
+    setTimeout(function () {
+      location.href = "./admin.html"
+    }, 2000)
+
   } catch (error) {
     console.error("Error adding pengguna document:", error);
   }

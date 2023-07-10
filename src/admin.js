@@ -44,9 +44,6 @@ auth.onAuthStateChanged(function (user) {
         userName.textContent = user.displayName;
         signOutButton.style.display = "block";
 
-        // This is a crude implementation to disallow users from accessing the admin panel
-        // Users may be able to disable this part of the script and gets full admin access to create new documents
-
         // Check if user's email exists in 'admin' collection
         const adminCollectionRef = collection(db, 'admin');
         const queryRef = query(adminCollectionRef, where('emel', '==', user.email));
@@ -91,7 +88,7 @@ function calculateRemainingBalance(user) {
         const dateB = new Date(b.tarikhImbuhan);
         return dateB - dateA;
     });
-    const latestImbuhan = sortedRekodImbuhan[0].tarikh;
+    // const latestImbuhan = sortedRekodImbuhan[0].tarikh;
     const totalSpending = sortedRekodImbuhan.reduce((total, imbuhan) => total + imbuhan, 0);
     return peruntukanAwal - totalSpending;
 }
@@ -103,12 +100,23 @@ function renderUserData(data) {
     data.forEach((doc, index) => {
         const user = doc.data();
 
-        const sortedRekodImbuhan = user.rekodImbuhan.sort((a, b) => {
-            const dateA = new Date(a.tarikhImbuhan);
-            const dateB = new Date(b.tarikhImbuhan);
-            return dateB - dateA;
-        });
-        const latestImbuhan = sortedRekodImbuhan[0].tarikh;
+        console.log(doc.data().rekodImbuhan.length)
+
+        let latestImbuhan = '';
+
+        
+        if (user.rekodImbuhan.length != 0) {
+            const sortedRekodImbuhan = user.rekodImbuhan.sort((a, b) => {
+                const dateA = new Date(a.tarikhImbuhan);
+                const dateB = new Date(b.tarikhImbuhan);
+                return dateB - dateA;
+            });
+            latestImbuhan = sortedRekodImbuhan[0].tarikh;
+        } else {
+            latestImbuhan = 'Tiada'
+            
+        }
+
         // Calculate starting allowance 
         const startingAllowance = user.statusPerkahwinan === "bujang" ? 500 : 2000;
         const totalSpending = doc.data().rekodImbuhan.reduce(

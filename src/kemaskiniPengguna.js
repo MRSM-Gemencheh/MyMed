@@ -113,6 +113,88 @@ getDoc(penggunaDocRef)
       }
       // Add code to calculate and prefill the 'bakiRMInput' field based on the document data
 
+      // Calculate starting allowance 
+      const startingAllowance = userData.statusPerkahwinan === "bujang" ? 500 : 2000;
+
+      let remainingAllowance = startingAllowance
+
+      // Update allowance records table
+      const rekodImbuhanTable = document.getElementById("rekodImbuhanTable");
+      rekodImbuhanTable.innerHTML = ""; // Clear existing table rows
+
+
+      userData.rekodImbuhan.forEach((rekod) => {
+        const row = document.createElement("tr");
+
+        const tarikh = new Date(rekod.tarikh);
+        const options = { day: "numeric", month: "long", year: "numeric" };
+        const formattedTarikh = tarikh.toLocaleDateString("ms-MY", options);
+
+        // Calculate remaining allowance for each record
+        const remainingAllowancePerRecord = remainingAllowance - rekod.imbuhan;
+
+        // Update remaining allowance for the next record
+        remainingAllowance = remainingAllowancePerRecord;
+
+        let index = 1
+
+        row.innerHTML = `
+              <td>${index++}</td>
+              <td>${formattedTarikh}</td>
+              <td>${rekod.namaPenerima}</td>
+              <td>${rekod.panelKlinik}</td>
+              <td>${rekod.noResit}</td>
+              <td>${'RM ' + rekod.imbuhan.toFixed(2)}</td>
+              <td>${'RM ' + remainingAllowance.toFixed(2)}</td>
+              <td><button class="button is-danger" id="padamRekodButton">Padam Rekod</button></td>
+          `;
+
+        rekodImbuhanTable.appendChild(row);
+
+        // Handle delete button click
+
+        const padamRekodButton = document.getElementById('padamRekodButton');
+
+        padamRekodButton.addEventListener('click', (event) => {
+          event.preventDefault();
+
+          // Confirm action with alert
+          if (confirm('Adakah anda pasti untuk memadam rekod ini?')) {
+
+            // If item is the last item in the array, reset the array
+            let rekodImbuhan = userData.rekodImbuhan
+            
+            if (rekodImbuhan.length == 1) {
+              rekodImbuhan = []
+            }
+
+            // Find the correct item in array based on the index
+
+            rekodImbuhan.splice(index, 1)
+
+
+            // Update the document with the new values
+
+            setDoc(penggunaDocRef, {
+              rekodImbuhan: rekodImbuhan
+              // Update other fields as needed
+            }, { merge: true })
+              .then(() => {
+                console.log('Document successfully deleted');
+                // Redirect or perform other actions upon successful delete
+              })
+              .catch((error) => {
+                console.log('Error deleting document:', error);
+              });
+          }
+
+          setTimeout(function () {
+            location.href = "./admin.html"
+          }, 2000)
+
+        })
+      });
+
     } else {
       console.log('Document does not exist');
     }
@@ -120,6 +202,7 @@ getDoc(penggunaDocRef)
   .catch((error) => {
     console.log('Error getting document:', error);
   });
+
 
 // Handle form submission
 const updateUserForm = document.getElementById('updateUserForm');
@@ -182,3 +265,4 @@ deleteButton.addEventListener('click', (event) => {
 
 }
 );
+

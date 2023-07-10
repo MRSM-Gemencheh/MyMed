@@ -1,4 +1,3 @@
-// Import the functions we need from the SDKs we need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { signInWithRedirect, getRedirectResult, getAuth, signOut, OAuthProvider } from "firebase/auth";

@@ -71,12 +71,23 @@
 
         <form id="recordForm" class="box">
             <div class="field">
-                <label class="label" for="senaraiPengguna">Nama</label>
+                <label class="label" for="senaraiPengguna">Nama Pengguna</label>
                 <div class="control">
                     <div class="select is-multiple">
                         <select multiple size="10" id="senaraiPengguna" required>
                             <option value="" disabled selected>Pilih Nama</option>
                             <!-- Senarai pengguna will be dynamically loaded here -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="senaraiAhliKeluargaPengguna">Nama Penerima Rawatan</label>
+                <div class="control">
+                    <div class="select is-multiple">
+                        <select multiple size="10" id="senaraiAhliKeluargaPengguna" required>
+                            <option value="" disabled selected>Pilih Nama Penerima Rawatan</option>
+                            <!-- Senarai ahli keluarga pengguna will be dynamically loaded here -->
                         </select>
                     </div>
                 </div>

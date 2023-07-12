@@ -50,7 +50,7 @@ const recordForm = document.getElementById("recordForm");
 recordForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const namaPenerima = document.getElementById("senaraiPengguna").value;
+    const namaPenerima = document.getElementById("senaraiAhliKeluargaPengguna").value;
     const tarikh = document.getElementById("tarikh").value;
     const noResit = document.getElementById("noResit").value;
     const imbuhan = document.getElementById("imbuhan").value;
@@ -67,7 +67,7 @@ recordForm.addEventListener("submit", async (event) => {
 
         // Retrieve the pengguna document based on the selected namaPenerima
         const penggunaQuerySnapshot = await getDocs(
-            query(collection(db, "pengguna"), where("nama", "==", namaPenerima))
+            query(collection(db, "pengguna"), where("nama", "==", document.getElementById("senaraiPengguna").value))
         );
 
         if (!penggunaQuerySnapshot.empty) {
@@ -135,6 +135,61 @@ async function fetchPengguna() {
         console.error("Error fetching teachers:", error);
     }
 }
+
+// Add a listener to the 'pengguna' select element
+const teacherSelect = document.getElementById("senaraiPengguna");
+
+teacherSelect.addEventListener("change", async (event) => {
+    const namaPengguna = event.target.value;
+
+    // Fetch the teacher document
+    const penggunaQuerySnapshot = await getDocs(
+        query(collection(db, "pengguna"), where("nama", "==", namaPengguna))
+    );
+
+    // Get the senaraiAhliKeluargaLayak select element
+    const senaraiAhliKeluargaPengguna = document.getElementById('senaraiAhliKeluargaPengguna')
+
+    // Clear existing options
+
+    senaraiAhliKeluargaPengguna.innerHTML = "";
+
+    // Create and add the default option
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    defaultOption.textContent = "Pilih Nama";
+    senaraiAhliKeluargaPengguna.appendChild(defaultOption);
+
+    // The first option should be the pengguna name
+
+    const option = document.createElement("option");
+    option.value = namaPengguna;
+    option.textContent = namaPengguna;
+
+    senaraiAhliKeluargaPengguna.appendChild(option);
+
+    // Create options for each ahli keluarga
+    penggunaQuerySnapshot.forEach((doc) => {
+        const senaraiAhliKeluarga = doc.data().ahliKeluargaLayak;
+
+        // Loop through the ahli keluarga and create options for each ahli keluarga
+        senaraiAhliKeluarga.forEach((ahliKeluarga) => {
+            const namaAhliKeluarga = ahliKeluarga.nama;
+
+            // Create option element
+            const option = document.createElement("option");
+            option.value = namaAhliKeluarga;
+            option.textContent = namaAhliKeluarga;
+
+            // Add option to the select element
+            senaraiAhliKeluargaPengguna.appendChild(option);
+        });
+    });
+});
+
+ 
 
 // Fetch teachers when the page is loaded
 window.addEventListener("DOMContentLoaded", fetchPengguna);

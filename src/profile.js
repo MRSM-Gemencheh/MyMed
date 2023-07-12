@@ -71,6 +71,61 @@ auth.onAuthStateChanged(function (user) {
                     const noKadPengenalan = document.getElementById('noKadPengenalan')
                     noKadPengenalan.textContent = `No. Kad Pengenalan: ${doc.data().noKadPengenalan}`
 
+
+                    const ahliKeluargaLayak = document.getElementById('ahliKeluargaLayak')
+
+                    // Empty the table first
+
+                    ahliKeluargaLayak.innerHTML = ""
+
+                    // Check if user has family members
+
+                    if (doc.data().ahliKeluargaLayak.length > 0) {
+                        // The first table row should always be the user itself
+
+                        let i = 1
+
+                        const firstRow = document.createElement("tr");
+
+                        firstRow.innerHTML = `
+                            <td>${i++}</td>
+                            <td>${doc.data().nama}</td>
+                            <td>${doc.data().noKadPengenalan}</td>
+                            <td>SENDIRI</td>
+                        `;
+
+                        ahliKeluargaLayak.appendChild(firstRow);
+
+
+                        // Add a new table row for each family member
+
+                        doc.data().ahliKeluargaLayak.forEach((ahli) => {
+                            const row = document.createElement("tr");
+
+                            row.innerHTML = `
+                                <td>${i++}</td>
+                                <td>${ahli.nama}</td>
+                                <td>${ahli.noKadPengenalan}</td>
+                                <td>${ahli.hubungan}</td>
+                            `;
+                            ahliKeluargaLayak.appendChild(row);
+                        });
+                    } else {
+                        // If user has no family members, the table should contain the user itself
+
+                        const row = document.createElement("tr");
+
+                        row.innerHTML = `
+                            <td>1</td>
+                            <td>${doc.data().nama}</td>
+                            <td>${doc.data().noKadPengenalan}</td>
+                            <td>SENDIRI</td>
+                        `;
+
+                        ahliKeluargaLayak.appendChild(row);
+
+                    }
+
                     // peruntukanAwal is RM 500 if 'statusPerkahwinan' is 'bujang', and RM 2000 otherwise
                     // To get the amount for baki RM, subtract the starting allowance with the total spending in 'rekodKlinik' 
 
@@ -92,7 +147,7 @@ auth.onAuthStateChanged(function (user) {
                     rekodImbuhanTable.innerHTML = ""; // Clear existing table rows
 
                     remainingAllowance = remainingAllowance + totalSpending
-                    
+
                     doc.data().rekodImbuhan.forEach((rekod) => {
                         const row = document.createElement("tr");
 
@@ -101,7 +156,7 @@ auth.onAuthStateChanged(function (user) {
                         const formattedTarikh = tarikh.toLocaleDateString("ms-MY", options);
 
                         // Calculate remaining allowance for each record
-                        const remainingAllowancePerRecord = remainingAllowance - rekod.imbuhan ;
+                        const remainingAllowancePerRecord = remainingAllowance - rekod.imbuhan;
 
                         // Update remaining allowance for the next record
                         remainingAllowance = remainingAllowancePerRecord;

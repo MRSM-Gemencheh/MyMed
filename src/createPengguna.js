@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { GoogleAuthProvider, getAuth} from "firebase/auth";
-import { getFirestore, collection, addDoc} from "firebase/firestore";
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAzlMJB0WkUFXUXaD-GszRKxJayUo8tZQo",
@@ -47,6 +47,62 @@ auth.onAuthStateChanged(function (user) {
 
 const db = getFirestore();
 
+// Dynamically add more fields to the 'maklumatAhliKeluarga' field for more family members
+// Each family member should have a name, no kad pengenalan and hubungan field
+
+// Get the elements from the DOM on page load
+document.addEventListener('DOMContentLoaded', function () {
+
+  const bilanganAhliKeluarga = document.getElementById('bilanganAhliKeluarga');
+
+  bilanganAhliKeluarga.addEventListener('change', () => {
+
+    // Dynamically add more fields to the 'maklumatAhliKeluarga' field for more family members
+    // Each family member should have a name, no kad pengenalan and hubungan field
+
+    let maklumatAhliKeluarga = document.getElementById('maklumatAhliKeluarga');
+
+    maklumatAhliKeluarga.innerHTML = "";
+
+    for (let i = 0; i < bilanganAhliKeluarga.value; i++) {
+
+      let ahliKeluarga = document.createElement('div');
+      ahliKeluarga.classList.add('ahliKeluarga');
+      ahliKeluarga.classList.add('field');
+
+      let namaAhliKeluarga = document.createElement('input');
+      namaAhliKeluarga.setAttribute('type', 'text');
+      namaAhliKeluarga.setAttribute('placeholder', 'Nama Ahli Keluarga ' + (i + 1));
+      namaAhliKeluarga.setAttribute('id', 'namaAhliKeluarga' + i);
+      namaAhliKeluarga.setAttribute('class', 'input')
+
+      let noKadPengenalanAhliKeluarga = document.createElement('input');
+      noKadPengenalanAhliKeluarga.setAttribute('type', 'text');
+      noKadPengenalanAhliKeluarga.setAttribute('placeholder', 'No Kad Pengenalan Ahli Keluarga ' + (i + 1));
+      noKadPengenalanAhliKeluarga.setAttribute('id', 'noKadPengenalanAhliKeluarga' + i);
+      noKadPengenalanAhliKeluarga.setAttribute('class', 'input')
+
+      let hubunganAhliKeluarga = document.createElement('input');
+      hubunganAhliKeluarga.setAttribute('type', 'text');
+      hubunganAhliKeluarga.setAttribute('placeholder', 'Hubungan Ahli Keluarga ' + (i + 1));
+      hubunganAhliKeluarga.setAttribute('id', 'hubunganAhliKeluarga' + i);
+      hubunganAhliKeluarga.setAttribute('class', 'input')
+
+      ahliKeluarga.appendChild(namaAhliKeluarga);
+      ahliKeluarga.appendChild(noKadPengenalanAhliKeluarga);
+      ahliKeluarga.appendChild(hubunganAhliKeluarga);
+
+      maklumatAhliKeluarga.appendChild(ahliKeluarga);
+    }
+
+  });
+
+
+});
+
+
+
+
 const registerForm = document.getElementById("registerForm");
 
 registerForm.addEventListener("submit", async (event) => {
@@ -60,9 +116,29 @@ registerForm.addEventListener("submit", async (event) => {
     'input[name="statusPerkahwinan"]:checked'
   ).value;
 
-  let rekodImbuhan = [
+  let rekodImbuhan = []
 
-  ]
+  const bilanganAhliKeluarga = document.getElementById('bilanganAhliKeluarga');
+
+  let ahliKeluargaLayak = []
+
+  // Store all of the ahli keluarga information as objects in the 'ahliKeluargaLayak' array
+
+  for (let i = 0; i < bilanganAhliKeluarga.value; i++) {
+
+    let namaAhliKeluarga = document.getElementById('namaAhliKeluarga' + i).value
+    let noKadPengenalanAhliKeluarga = document.getElementById('noKadPengenalanAhliKeluarga' + i).value
+    let hubunganAhliKeluarga = document.getElementById('hubunganAhliKeluarga' + i).value
+
+    let ahliKeluarga = {
+      nama: namaAhliKeluarga,
+      noKadPengenalan: noKadPengenalanAhliKeluarga,
+      hubungan: hubunganAhliKeluarga
+    }
+
+    ahliKeluargaLayak.push(ahliKeluarga)
+  }
+
 
   try {
     const penggunaData = {
@@ -71,7 +147,9 @@ registerForm.addEventListener("submit", async (event) => {
       emel: emel,
       noGaji: noGaji,
       statusPerkahwinan: statusPerkahwinan,
-      rekodImbuhan: rekodImbuhan
+      rekodImbuhan: rekodImbuhan,
+      ahliKeluargaLayak: ahliKeluargaLayak,
+      bilanganAhliKeluarga: document.getElementById('bilanganAhliKeluarga').value
     };
 
     // Add new 'pengguna' document to the 'pengguna' collection
@@ -90,3 +168,4 @@ registerForm.addEventListener("submit", async (event) => {
     console.error("Error adding pengguna document:", error);
   }
 });
+

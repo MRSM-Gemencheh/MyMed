@@ -53,9 +53,9 @@ const db = getFirestore();
 // Get the elements from the DOM on page load
 document.addEventListener('DOMContentLoaded', function () {
 
-  const bilanganAhliKeluarga = document.getElementById('bilanganAhliKeluarga');
+  const bilanganAhliKeluargaElement = document.getElementById('bilanganAhliKeluargaInput');
 
-  bilanganAhliKeluarga.addEventListener('change', () => {
+  bilanganAhliKeluargaElement.addEventListener('change', () => {
 
     // Dynamically add more fields to the 'maklumatAhliKeluarga' field for more family members
     // Each family member should have a name, no kad pengenalan and hubungan field
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     maklumatAhliKeluarga.innerHTML = "";
 
-    for (let i = 0; i < bilanganAhliKeluarga.value; i++) {
+    for (let i = 0; i < bilanganAhliKeluargaElement.value; i++) {
 
       let ahliKeluarga = document.createElement('div');
       ahliKeluarga.classList.add('ahliKeluarga');
@@ -118,13 +118,13 @@ registerForm.addEventListener("submit", async (event) => {
 
   let rekodImbuhan = []
 
-  const bilanganAhliKeluarga = document.getElementById('bilanganAhliKeluarga');
+  const bilanganAhliKeluargaElement = document.getElementById('bilanganAhliKeluargaInput');
 
   let ahliKeluargaLayak = []
 
   // Store all of the ahli keluarga information as objects in the 'ahliKeluargaLayak' array
 
-  for (let i = 0; i < bilanganAhliKeluarga.value; i++) {
+  for (let i = 0; i < bilanganAhliKeluargaElement.value; i++) {
 
     let namaAhliKeluarga = document.getElementById('namaAhliKeluarga' + i).value
     let noKadPengenalanAhliKeluarga = document.getElementById('noKadPengenalanAhliKeluarga' + i).value
@@ -149,7 +149,7 @@ registerForm.addEventListener("submit", async (event) => {
       statusPerkahwinan: statusPerkahwinan,
       rekodImbuhan: rekodImbuhan,
       ahliKeluargaLayak: ahliKeluargaLayak,
-      bilanganAhliKeluarga: document.getElementById('bilanganAhliKeluarga').value
+      bilanganAhliKeluarga: document.getElementById('bilanganAhliKeluargaInput').value
     };
 
     // Add new 'pengguna' document to the 'pengguna' collection

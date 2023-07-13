@@ -131,6 +131,7 @@ auth.onAuthStateChanged(function (user) {
 
                     // Calculate starting allowance 
                     const startingAllowance = doc.data().statusPerkahwinan === "bujang" ? 500 : 2000;
+                    document.getElementById('kelayakanPeruntukan').textContent = `Kelayakan Peruntukan: RM ${startingAllowance.toFixed(2)}`
                     document.getElementById('bakiPeruntukanAwal').textContent = `Baki Peruntukan Pada Awal Tahun: RM ${startingAllowance.toFixed(2)}`
                     const totalSpending = doc.data().rekodImbuhan.reduce(
                         (total, rekod) => total + rekod.imbuhan,

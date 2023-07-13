@@ -123,7 +123,9 @@
 
     <hr>
 
+    
     <div class="box">
+        <h1 class="title">Rekod Imbuhan Rawatan</h1>
         <div class="table-container">
             <table class="table is-fullwidth">
                 <thead>
@@ -149,6 +151,68 @@
 
                     </tr>
 
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="box">
+
+        <button class="button is-primary" id="tambahAhliButton">Tambah Ahli Keluarga</button>
+        <div class="block"></div>
+        <div class="container" id="tambahAhliKeluargaForm" style="display: none;">
+            <div class="field">
+                <label class="label" for="namaAhliKeluargaBaru">Nama</label>
+                <div class="control">
+                    <input class="input" type="text" id="namaAhliKeluargaBaru" placeholder="e.g AHMAD ANAS BIN SUHAIMI" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="noKadPengenalanAhliKeluargaBaru">No. Kad Pengenalan</label>
+                <div class="control">
+                    <input class="input" type="text" id="noKadPengenalanAhliKeluargaBaru" placeholder="e.g 010203-12-0014" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="hubunganAhliKeluargaBaru">Hubungan</label>
+                <div class="control">
+                    <input class="input" type="text" id="hubunganAhliKeluargaBaru" placeholder="e.g ANAK" required>
+                </div>
+            </div>
+
+            <button class="button is-link" id="hantarAhliButton">Hantar</button>
+
+        </div>
+
+        <script>
+            // Set display to block when the button is clicked
+
+            document.getElementById('tambahAhliButton').addEventListener('click', () => {
+                document.getElementById('tambahAhliKeluargaForm').style.display = 'block';
+            });
+        </script>
+        
+
+        <div class="block"></div>
+        <h1 class="title">Ahli Keluarga Yang Layak Menerima Rawatan</h1>
+        <div class="table-container">
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Bil</th>
+                        <th>Nama</th>
+                        <th>No. K/P / No. S.B</th>
+                        <th>Hubungan</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="ahliKeluargaLayakTable">
+                    <tr>
+                        <th>1</th>
+                        <td>Nama Pengguna</td>
+                        <td>010203-15-0025</td>
+                        <td>Sendiri</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

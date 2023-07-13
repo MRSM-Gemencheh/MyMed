@@ -153,47 +153,160 @@ getDoc(penggunaDocRef)
 
         // Handle delete button click
 
-        const padamRekodButton = document.getElementById('padamRekodButton');
+      });
+      const padamRekodButton = document.getElementById('padamRekodButton');
 
-        padamRekodButton.addEventListener('click', (event) => {
-          event.preventDefault();
+      padamRekodButton.addEventListener('click', (event) => {
+        event.preventDefault();
 
-          // Confirm action with alert
-          if (confirm('Adakah anda pasti untuk memadam rekod ini?')) {
+        // Confirm action with alert
+        if (confirm('Adakah anda pasti untuk memadam rekod ini?')) {
 
-            // If item is the last item in the array, reset the array
-            let rekodImbuhan = userData.rekodImbuhan
-            
-            if (rekodImbuhan.length == 1) {
-              rekodImbuhan = []
-            }
+          // If item is the last item in the array, reset the array
+          let rekodImbuhan = userData.rekodImbuhan
 
-            // Find the correct item in array based on the index
-
-            rekodImbuhan.splice(index, 1)
-
-
-            // Update the document with the new values
-
-            setDoc(penggunaDocRef, {
-              rekodImbuhan: rekodImbuhan
-              // Update other fields as needed
-            }, { merge: true })
-              .then(() => {
-                console.log('Document successfully deleted');
-                // Redirect or perform other actions upon successful delete
-              })
-              .catch((error) => {
-                console.log('Error deleting document:', error);
-              });
+          if (rekodImbuhan.length == 1) {
+            rekodImbuhan = []
           }
 
-          setTimeout(function () {
-            location.href = "./admin.html"
-          }, 2000)
+          // Find the correct item in array based on the the value in the first data cell of the row
 
+          rekodImbuhan.splice(0, 1)
+
+
+          // Update the document with the new values
+
+          setDoc(penggunaDocRef, {
+            rekodImbuhan: rekodImbuhan
+            // Update other fields as needed
+          }, { merge: true })
+            .then(() => {
+              console.log('Document successfully deleted');
+              // Redirect or perform other actions upon successful delete
+            })
+            .catch((error) => {
+              console.log('Error deleting document:', error);
+            });
+        }
+
+        setTimeout(function () {
+          location.reload()
+        }, 2000)
+
+      })
+
+      const hantarAhliButton = document.getElementById('hantarAhliButton')
+
+      hantarAhliButton.addEventListener('click', (event) => {
+
+        // Get the values from the form
+
+        const namaAhliKeluargaBaru = document.getElementById('namaAhliKeluargaBaru').value;
+        const noKadPengenalanAhliKeluargaBaru = document.getElementById('noKadPengenalanAhliKeluargaBaru').value;
+        const hubunganAhliKeluargaBaru = document.getElementById('hubunganAhliKeluargaBaru').value;
+
+        // Get the existing array of ahliKeluarga from Firestore
+
+        let ahliKeluargaLayak = userData.ahliKeluargaLayak
+
+        // Add the new ahliKeluarga to the array
+
+        ahliKeluargaLayak.push({
+          nama: namaAhliKeluargaBaru,
+          noKadPengenalan: noKadPengenalanAhliKeluargaBaru,
+          hubungan: hubunganAhliKeluargaBaru
         })
+
+        // Update the document with the new values
+
+        setDoc(penggunaDocRef, {
+          ahliKeluargaLayak: ahliKeluargaLayak,
+          bilanganAhliKeluarga: userData.bilanganAhliKeluarga + 1
+          // Update other fields as needed
+        }, { merge: true })
+          .then(() => {
+            console.log('Document successfully updated');
+            setTimeout(function () {
+              location.reload()
+            }, 2000)
+            // Redirect or perform other actions upon successful update
+          })
+          .catch((error) => {
+            console.log('Error updating document:', error);
+          });
+
+
+
+      })
+
+      const ahliKeluargaLayakTable = document.getElementById("ahliKeluargaLayakTable");
+
+      ahliKeluargaLayakTable.innerHTML = ""; // Clear existing table rows
+
+      let index2 = 1
+
+      userData.ahliKeluargaLayak.forEach((ahliKeluarga) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+              <td>${index2++}</td>
+              <td>${ahliKeluarga.nama}</td>
+              <td>${ahliKeluarga.noKadPengenalan}</td>
+              <td>${ahliKeluarga.hubungan}</td>
+              <td><button class="button is-danger" data-id="padamAhliKeluargaButton" data-index="${index2}">Padam Ahli Keluarga</button></td>
+          `;
+        ahliKeluargaLayakTable.appendChild(row);
+
+        
+        
       });
+      // Handle delete button click
+
+      // Select all buttons with the data-id 'padamAhliKeluargaButton'
+
+      const padamAhliKeluargaButton = document.querySelector('[data-id="padamAhliKeluargaButton"]');
+
+      padamAhliKeluargaButton.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        // Confirm action with alert
+        if (confirm('Adakah anda pasti untuk memadam ahli keluarga ini?')) {
+
+          // If item is the last item in the array, reset the array
+          let ahliKeluargaLayak = userData.ahliKeluargaLayak
+
+          if (ahliKeluargaLayak.length == 1) {
+            ahliKeluargaLayak = []
+          }
+
+          // Find the correct item in array based on the data-index2 of the clicked button
+
+          ahliKeluargaLayak.splice(0, 1)
+
+          // Update the document with the new values
+
+          setDoc(penggunaDocRef, {
+            ahliKeluargaLayak: ahliKeluargaLayak
+
+            // Update other fields as needed
+          }, { merge: true })
+            .then(() => {
+              console.log('Document successfully deleted');
+
+              setTimeout(function () {
+                location.reload()
+              }, 2000)
+              // Redirect or perform other actions upon successful delete
+            })
+            .catch((error) => {
+              console.log('Error deleting document:', error);
+            });
+        }
+
+
+
+      })
+
 
     } else {
       console.log('Document does not exist');

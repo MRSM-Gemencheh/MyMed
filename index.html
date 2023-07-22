@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | MyMed</title>
+    <meta name="description" content="Sistem semak baki peruntukan rawatan panel klinik
+    penjawat MARA">
+    <meta name="author" content="MagusWyvern">
+    <title>Log Masuk | MyMed</title>
 
     <link rel="icon" href="./icon.png">
 
@@ -24,6 +27,7 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./src/bulma.min.css">
+    <link rel="stylesheet" href="./src/index.css">
 </head>
 
 <body>
@@ -84,44 +88,19 @@
 
 
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // Get all "navbar-burger" elements
-            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-            // Add a click event on each of them
-            $navbarBurgers.forEach(el => {
-                el.addEventListener('click', () => {
-
-                    // Get the target from the "data-target" attribute
-                    const target = el.dataset.target;
-                    const $target = document.getElementById(target);
-
-                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                    el.classList.toggle('is-active');
-                    $target.classList.toggle('is-active');
-
-                });
-            });
-
-        });
-    </script>
-
-
 
     <hr>
-
+    
     <footer class="footer">
         <div class="content has-text-centered">
             <p>
-                <strong>MyMed</strong> by <a href="https://github.com/MRSM-Gemencheh">MARA Junior Science College
-                    Gemencheh</a>. The source code is licensed
-                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. Report bugs and erroneous activity to
-                <a href="mailto:maguswyvern@gmail.com">the developer</a>.
+                <strong>MyMed</strong> oleh <a href="https://github.com/MagusWyvern">Adi Ahmad Danish</a>. Projek ini dihasilkan untuk penyertaan ke Digital Technova Arena 2023. Laporkan sebarang masalah dan cadangan kepada
+                <a href="mailto:maguswyvern@gmail.com">pembangun laman</a>.
             </p>
         </div>
     </footer>
+    
+    <script src="./src/closeNavbarBurger.js"></script>
     <script src="./dist/index.bundle.js" type="module" defer></script>
 </body>
 

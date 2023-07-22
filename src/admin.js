@@ -1,7 +1,7 @@
+import { getFirestore, collection, query, getDocs, where } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAuth, signOut } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, query, getDocs, where } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAzlMJB0WkUFXUXaD-GszRKxJayUo8tZQo",
@@ -125,11 +125,18 @@ function renderUserData(data) {
         );
         let remainingAllowance = startingAllowance - totalSpending;
 
+        // Uppercase the text for 'statusPerkahwinan'
+        let statusPerkahwinan = user.statusPerkahwinan.charAt(0).toUpperCase() + user.statusPerkahwinan.slice(1);
+
         const remainingBalance = calculateRemainingBalance(user);
         const row = document.createElement('tr');
         row.innerHTML = `
         <th>${index + 1}</th>
         <td>${user.nama}</td>
+        <td>${user.noGaji}</td>
+        <td>${user.noKadPengenalan}</td>
+        <td>${user.emel}</td>
+        <td>${statusPerkahwinan}</td>
         <td>${latestImbuhan}</td>
         <td>RM ${remainingAllowance.toFixed(2)}</td>
         <td><a class="button is-link" href="kemaskiniPengguna.html?docid=${doc.id}"><span><i class="fa-solid fa-gear"></i></span><span class="ml-1">Kemaskini</span></a></td>
@@ -137,8 +144,6 @@ function renderUserData(data) {
         penggunaTable.appendChild(row);
     });
 }
-
-// ...
 
 // Load user data from Firestore and populate the table
 const penggunaCollectionRef = collection(db, 'pengguna');
@@ -155,5 +160,3 @@ getDocs(userDataQuery)
     .catch((error) => {
         console.log("Error getting user data:", error);
     });
-
-

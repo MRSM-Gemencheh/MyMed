@@ -36,6 +36,28 @@ document.body.onload = function () {
   })
 }
 
+function checkUserAdminStatus() {
+      // Check if user's email exists in 'admin' collection
+      const adminCollectionRef = collection(db, 'admin');
+      const queryRef = query(adminCollectionRef, where('emel', '==', user.email));
+  
+      getDocs(queryRef)
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            console.log("User is an admin."); // User's email exists in 'admin' collection
+            // Perform actions for admin user
+          } else {
+            console.log("User is not an admin."); // User's email doesn't exist in 'admin' collection
+            setTimeout(function () {
+              location.href = "./index.html"
+            }, 2000)
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting admin collection:", error);
+        });
+}
+
 auth.onAuthStateChanged(function (user) {
   if (user) {
     // User is signed in
@@ -44,28 +66,7 @@ auth.onAuthStateChanged(function (user) {
     userName.textContent = user.displayName;
     signOutButton.style.display = "block";
 
-    // This is a crude implementation to disallow users from accessing the admin panel
-    // Users may be able to disable this part of the script and gets full admin access to create new documents
-
-    // Check if user's email exists in 'admin' collection
-    const adminCollectionRef = collection(db, 'admin');
-    const queryRef = query(adminCollectionRef, where('emel', '==', user.email));
-
-    getDocs(queryRef)
-      .then((querySnapshot) => {
-        if (querySnapshot.size > 0) {
-          console.log("User is an admin."); // User's email exists in 'admin' collection
-          // Perform actions for admin user
-        } else {
-          console.log("User is not an admin."); // User's email doesn't exist in 'admin' collection
-          setTimeout(function () {
-            location.href = "./index.html"
-          }, 2000)
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting admin collection:", error);
-      });
+    checkUserAdminStatus()
   } else {
     // User is signed out
     console.log("User is not logged in");
@@ -83,13 +84,9 @@ auth.onAuthStateChanged(function (user) {
   }
 });
 
-
 // Get the docid parameter from the URL
 const urlParams = new URLSearchParams(window.location.search);
 const docid = urlParams.get('docid');
-
-// Use the docid as needed
-console.log(docid); // Example: Print the docid to the console
 
 // Reference the 'pengguna' document using the docid
 const penggunaDocRef = doc(db, 'pengguna', docid);
@@ -151,9 +148,9 @@ getDoc(penggunaDocRef)
 
         rekodImbuhanTable.appendChild(row);
 
-        // Handle delete button click
-
       });
+
+      // Handle delete button click
       const padamRekodButton = document.getElementById('padamRekodButton');
 
       padamRekodButton.addEventListener('click', (event) => {
@@ -169,10 +166,10 @@ getDoc(penggunaDocRef)
             rekodImbuhan = []
           }
 
+          // TODO: Fix this code to find the correct item in array based on the data-index of the clicked button
           // Find the correct item in array based on the the value in the first data cell of the row
 
           rekodImbuhan.splice(0, 1)
-
 
           // Update the document with the new values
 

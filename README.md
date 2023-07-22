@@ -10,8 +10,10 @@ This project was a submission for the Computer Project Digital Technova Arena 20
 
 1. Run the following: 
 
-`npm i`
-`npm run build-dev`
+```
+npm i
+npm run build-dev
+```
 
 2. Install the 'Live Server' extension for VSCode
 

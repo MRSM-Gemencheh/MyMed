@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #003b6b;
+}
+
+
 .center {
   display: flex;
   justify-content: center;
@@ -6,4 +11,14 @@
 
 .hero {
   border-radius: 10px;
+}
+
+#signInButton {
+  background-color: var(--primary-color);
+  transition: all 0.3s ease-in-out;
+}
+
+#signInButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 5px #0078d7, 0 0 10px #0078d7, 0 0 15px #0078d7, 0 0 20px #0078d7;
 }

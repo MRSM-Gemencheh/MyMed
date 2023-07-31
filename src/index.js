@@ -1,9 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { signInWithRedirect, getRedirectResult, getAuth, signOut, OAuthProvider } from "firebase/auth";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Our web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -19,14 +15,51 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 const auth = getAuth();
-const provider = new OAuthProvider('microsoft.com', '708855ff-2443-4a76-8e6b-766565c5928e');
+const provider = new OAuthProvider('microsoft.com');
 
 provider.setCustomParameters({
     prompt: "login",
     tenant: "common",
+});
+
+getRedirectResult(getAuth())
+    .then((result) => {
+        // IdP data available in result.additionalUserInfo.profile.
+
+        // Get the OAuth access token and ID Token
+        const credential = OAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+        const idToken = credential.idToken;
+
+        // The signed-in user info.
+        const user = result.user;
+
+    }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+    });
+
+auth.onAuthStateChanged(function (user) {
+    if (user) {
+
+        userName.textContent = user.displayName;
+        signInButton.style.display = "none"
+        signOutButton.style.display = "block"
+
+        signInSuccessStyleUpdates()
+
+        // Redirect the user to the profile page
+        setTimeout(function () {
+            location.href = "./profile.html"
+        }, 1000)
+
+    } else {
+        // User is signed out
+        console.log("User is not logged in");
+    }
 });
 
 // Get the elements from the DOM on page load
@@ -34,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const signInButton = document.getElementById('signInButton');
     const signOutButton = document.getElementById('signOutButton');
-    let programsContainer = document.getElementById('programsContainer');
-    let userName = document.getElementById('userName');
+    const programsContainer = document.getElementById('programsContainer');
+    const userName = document.getElementById('userName');
 
     signInButton.addEventListener('click', () => {
         console.log("Sign in process initiated!")
@@ -57,53 +90,13 @@ document.addEventListener('DOMContentLoaded', function () {
     return signInButton, signOutButton, programsContainer, userName
 });
 
-getRedirectResult(getAuth())
-    .then((result) => {
-        // IdP data available in result.additionalUserInfo.profile.
-
-        // Get the OAuth access token and ID Token
-        const credential = OAuthProvider.credentialFromResult(result);
-        const accessToken = credential.accessToken;
-        const idToken = credential.idToken;
-
-        // The signed-in user info.
-        const user = result.user;
-
-        console.log(user)
-
-    }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        // const email = error.customData.email;
-        // The AuthCredential type that was used.
-        // ...
-    });
-
-auth.onAuthStateChanged(function (user) {
-    if (user) {
-        // User is signed in, you can access the user object
-        console.log(user);
-
-        userName.textContent = user.displayName;
-        signInButton.style.display = "none"
-        signOutButton.style.display = "block"
-
-        signInSuccessAnimations()
-        
-        // Redirect the user to the profile page
-        setTimeout(function () {
-            location.href = "./profile.html"
-        }, 2000)
-
-    } else {
-        // User is signed out
-        console.log("User is not logged in");
+function signInSuccessStyleUpdates() {
+    var progressBar = document.getElementById('signInSuccessProgressBar')
+    if (progressBar) {
+        progressBar.style.display = "block"
     }
-});
-
-function signInSuccessAnimations() {
-    document.getElementById('signInSuccessProgressBar').style.display = "block"
-    document.getElementById('signInSuccessText').style.display = "block"
+    var successText = document.getElementById('signInSuccessText')
+    if (successText) {
+        successText.style.display = "block"
+    }
 }

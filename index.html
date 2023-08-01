@@ -17,10 +17,6 @@
             justify-content: center;
             align-items: center;
         }
-
-        .hero {
-            border-radius: 10px;
-        }
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -60,46 +56,47 @@
         Log masuk berjaya! Sedang menghantar anda ke paparan rekod imbuhan...
     </div>
 
-    <div class="container">
-        <section class="hero is-medium is-link ">
-            <div class="hero-body">
+    <section class="hero is-medium is-link is-desktop">
+        <div class="hero-body">
 
-                <p class="title" style="text-align: center;">
-                    MyMed
-                </p>
+            <p class="title" style="text-align: center;">
+                MyMed
+            </p>
 
-                <p class="subtitle" style="text-align: center;">Sistem semak baki peruntukan rawatan panel klinik
-                    penjawat MARA
-                </p>
+            <p class="subtitle" style="text-align: center;">Sistem semak baki peruntukan rawatan panel klinik
+                penjawat MARA
+            </p>
 
-                <div class="center pb-5">
-                    <button class="button is-primary" id="signInButton"><i class="fa-brands fa-microsoft p-2"></i>Log
-                        Masuk dengan Microsoft</button>
-                </div>
-
-                <div class="center">
-                    <button class="button is-danger" id="signOutButton" style="display: none;">
-                        <span><i class="fa-solid fa-right-from-bracket"></i></span>
-                        <span class="ml-1">Log Keluar</span>
-                    </button>
-                </div>
+            <div class="center pb-5">
+                <button class="button is-primary" id="signInButton"><i class="fa-brands fa-microsoft p-2"></i>Log
+                    Masuk dengan Microsoft</button>
             </div>
-        </section>
+
+            <div class="center">
+                <button class="button is-danger" id="signOutButton" style="display: none;">
+                    <span><i class="fa-solid fa-right-from-bracket"></i></span>
+                    <span class="ml-1">Log Keluar</span>
+                </button>
+            </div>
+        </div>
+    </section>
 
 
-    </div>
+
 
     <hr>
-    
+
     <footer class="footer">
         <div class="content has-text-centered">
             <p>
-                <strong>MyMed</strong> oleh <a href="https://github.com/MagusWyvern">Adi Ahmad Danish</a>. Projek ini dihasilkan untuk penyertaan ke Digital Technova Arena 2023. Laporkan sebarang masalah dan cadangan kepada
+                <strong>MyMed</strong> oleh <a href="https://github.com/MagusWyvern">Adi Ahmad Danish</a>. Projek ini
+                dihasilkan untuk penyertaan ke Digital Technova Arena 2023. Laporkan sebarang masalah dan cadangan
+                kepada
                 <a href="mailto:maguswyvern@gmail.com">pembangun laman</a>.
             </p>
         </div>
     </footer>
-    
+
     <script src="./src/closeNavbarBurger.js"></script>
     <script src="./dist/index.bundle.js" type="module" defer></script>
 </body>

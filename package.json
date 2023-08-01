@@ -10,13 +10,13 @@
   },
   "name": "mymed",
   "description": "Sistem semak baki peruntukan panel klinik bagi staf MARA",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
     "build-dev": "webpack --config webpack-dev.config.js",
-    "css-build": "node-sass --omit-source-map-url ./sass/index.scss ./src/index.css",
+    "css-build": "node-sass --omit-source-map-url ./sass/index.scss ./src/css/index.css",
     "css-watch": "npm run css-build -- --watch"
   },
   "repository": {

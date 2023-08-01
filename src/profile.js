@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth, signOut } from "firebase/auth";
 import { getFirestore, collection, query, getDocs, where } from "firebase/firestore";
 
@@ -15,10 +14,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 const auth = getAuth();
-
 const db = getFirestore();
 
 document.body.onload = function () {
@@ -39,10 +35,7 @@ document.body.onload = function () {
 
 auth.onAuthStateChanged(function (user) {
     if (user) {
-        // User is signed in, you can access the user object
-        console.log(user);
 
-        const accessToken = user.accessToken
         const userEmail = user.email;
         const usersCollectionRef = collection(db, "pengguna");
         const userQueryRef = query(usersCollectionRef, where("emel", "==", userEmail));
@@ -71,12 +64,8 @@ auth.onAuthStateChanged(function (user) {
                     const noKadPengenalan = document.getElementById('noKadPengenalan')
                     noKadPengenalan.textContent = `No. Kad Pengenalan: ${doc.data().noKadPengenalan}`
 
-
                     const ahliKeluargaLayak = document.getElementById('ahliKeluargaLayak')
-
-                    // Empty the table first
-
-                    ahliKeluargaLayak.innerHTML = ""
+                    ahliKeluargaLayak.innerHTML = "" // Empty the table first
 
                     // Check if user has family members
 
@@ -89,8 +78,8 @@ auth.onAuthStateChanged(function (user) {
 
                         firstRow.innerHTML = `
                             <td>${i++}</td>
-                            <td>${doc.data().nama}</td>
-                            <td>${doc.data().noKadPengenalan}</td>
+                            <td>${doc.data().nama || "-"}</td>
+                            <td>${doc.data().noKadPengenalan || "-"}</td>
                             <td>SENDIRI</td>
                         `;
 
@@ -126,9 +115,6 @@ auth.onAuthStateChanged(function (user) {
 
                     }
 
-                    // peruntukanAwal is RM 500 if 'statusPerkahwinan' is 'bujang', and RM 2000 otherwise
-                    // To get the amount for baki RM, subtract the starting allowance with the total spending in 'rekodKlinik' 
-
                     // Calculate starting allowance 
                     const startingAllowance = doc.data().statusPerkahwinan === "bujang" ? 500 : 2000;
                     document.getElementById('kelayakanPeruntukan').textContent = `Kelayakan Peruntukan: RM ${startingAllowance.toFixed(2)}`
@@ -143,7 +129,8 @@ auth.onAuthStateChanged(function (user) {
                     const bakiElaun = document.getElementById("bakiElaun");
                     bakiElaun.textContent = `Baki Peruntukan Terkini: RM ${remainingAllowance.toFixed(2)}`;
 
-                    // Update allowance records table
+
+                    // Update rekod imbuhan table
                     const rekodImbuhanTable = document.getElementById("rekodImbuhanTable");
                     rekodImbuhanTable.innerHTML = ""; // Clear existing table rows
 
@@ -180,23 +167,7 @@ auth.onAuthStateChanged(function (user) {
             });
 
 
-        // Check if user's email exists in 'admin' collection
-        const adminCollectionRef = collection(db, 'admin');
-        const queryRef = query(adminCollectionRef, where('emel', '==', user.email));
 
-        getDocs(queryRef)
-            .then((querySnapshot) => {
-                if (querySnapshot.size > 0) {
-                    console.log("User is an admin."); // User's email exists in 'admin' collection
-                    // Perform actions for admin user
-                } else {
-                    console.log("User is not an admin."); // User's email doesn't exist in 'admin' collection
-                    document.getElementById('adminButton').style.display = 'none'
-                }
-            })
-            .catch((error) => {
-                console.log("Error getting admin collection:", error);
-            });
 
         userName.textContent = user.displayName;
         signOutButton.style.display = "block"
@@ -218,10 +189,22 @@ auth.onAuthStateChanged(function (user) {
     }
 });
 
+async function checkAdminStatus() {
+    // Check if user's email exists in 'admin' collection
+    const adminCollectionRef = collection(db, 'admin');
+    const queryRef = query(adminCollectionRef, where('emel', '==', user.email));
 
-
-
-
-
-
-
+    getDocs(queryRef)
+        .then((querySnapshot) => {
+            if (querySnapshot.size > 0) {
+                console.log("User is an admin."); // User's email exists in 'admin' collection
+                // Perform actions for admin user
+            } else {
+                console.log("User is not an admin."); // User's email doesn't exist in 'admin' collection
+                document.getElementById('adminButton').style.display = 'none'
+            }
+        })
+        .catch((error) => {
+            console.log("Error getting admin collection:", error);
+        });
+}

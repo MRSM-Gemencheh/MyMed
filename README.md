@@ -19,4 +19,4 @@ npm run build-dev
 
 3. Launch Live Server and go to `localhost:5500`
 
-Note: The Firebase backend only authentication requests from `localhost` or `127.0.0.1`.
+Note: The Firebase backend only accepts authentication requests from `localhost` or `127.0.0.1`.
